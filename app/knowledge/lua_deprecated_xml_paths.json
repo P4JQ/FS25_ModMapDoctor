@@ -1,0 +1,1607 @@
+[
+  {
+    "old": "vehicle.ackermannSteering",
+    "new": "vehicle.wheels.ackermannSteeringConfigurations.ackermannSteering",
+    "era": "FS19 to FS21"
+  },
+  {
+    "old": "vehicle.ackermannSteeringConfigurations",
+    "new": "vehicle.wheels.ackermannSteeringConfigurations",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.aiPlough#rotateEarly",
+    "new": "vehicle.plow.ai#rotateCompletelyHeadlandPos",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.allowsLowering",
+    "new": "vehicle.inputAttacherJoints.inputAttacherJoint#allowsLowering",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.animTimeCenterPosition#value",
+    "new": "vehicle.plow.ai#centerPosition",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.animation",
+    "new": "vehicle.windrowers.windrower",
+    "era": "FS13 to FS15"
+  },
+  {
+    "old": "vehicle.articulatedAxis.rotatingPart(0)#index",
+    "new": "vehicle.articulatedAxis.rotatingPart(0)#node",
+    "era": null
+  },
+  {
+    "old": "vehicle.attachRootNode#index",
+    "new": "vehicle.attacherJoint#rootNode",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.attachable.steeringAxleAngleScale#targetNode",
+    "new": "vehicle.attachable.steeringAxleAngleScale.targetNode#node",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.attachable.toolCameras#count",
+    "new": "vehicle.attachable.toolCameras",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.attachable.toolCameras.toolCamera1",
+    "new": "vehicle.attachable.toolCamera",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.attachable.toolCameras.toolCamera2",
+    "new": "vehicle.attachable.toolCamera",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.attachable.toolCameras.toolCamera3",
+    "new": "vehicle.attachable.toolCamera",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.attacherJoint",
+    "new": "vehicle.inputAttacherJoints.inputAttacherJoint",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.attacherJointControl.control1",
+    "new": "vehicle.attacherJointControl.control with #controlFunction 'controlAttacherJointHeight'",
+    "era": null
+  },
+  {
+    "old": "vehicle.attacherJointControl.control2",
+    "new": "vehicle.attacherJointControl.control with #controlFunction 'controlAttacherJointTilt'",
+    "era": null
+  },
+  {
+    "old": "vehicle.baleGrab#grabRefComponentJointIndex1",
+    "new": "vehicle.baleGrab.grab#componentJointIndex",
+    "era": null
+  },
+  {
+    "old": "vehicle.baleGrab#grabRefComponentJointIndex2",
+    "new": "vehicle.baleGrab.grab#componentJointIndex",
+    "era": null
+  },
+  {
+    "old": "vehicle.baleGrab#jointType",
+    "new": "vehicle.baleGrab#dynamicMountType",
+    "era": null
+  },
+  {
+    "old": "vehicle.baleGrab#rotDiffThreshold1",
+    "new": "vehicle.baleGrab.grab#rotationThreshold",
+    "era": null
+  },
+  {
+    "old": "vehicle.baleGrab#rotDiffThreshold2",
+    "new": "vehicle.baleGrab.grab#rotationThreshold",
+    "era": null
+  },
+  {
+    "old": "vehicle.baleGrabber",
+    "new": "vehicle.baleLoader.grabber",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleLoader#alwaysMoveBalePlaces",
+    "new": "vehicle.baleLoader.animations.moveBalePlaces#alwaysMove",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baleLoader#moveBalePlacesAfterRotatePlatform",
+    "new": "vehicle.baleLoader.animations.moveBalePlaces#moveAfterRotatePlatform",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baleLoader#moveBalePlacesMaxGrabberTime",
+    "new": "vehicle.baleLoader.animations.moveBalePlaces#maxGrabberTime",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baleLoader#pickupRange",
+    "new": "vehicle.baleLoader.grabber#pickupRange",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleLoader#resetEmptyRotateAnimation",
+    "new": "vehicle.baleLoader.animations.emptyRotate#reset",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baleLoader#rotatePlatformAnimName",
+    "new": "vehicle.baleLoader.animations#rotatePlatform",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleLoader#rotatePlatformBackAnimName",
+    "new": "vehicle.baleLoader.animations#rotatePlatformBack",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleLoader#rotatePlatformEmptyAnimName",
+    "new": "vehicle.baleLoader.animations#rotatePlatformEmpty",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleLoader#textAbortUnloading",
+    "new": "vehicle.baleLoader.texts#abortUnloading",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleLoader#textLowerPlattform",
+    "new": "vehicle.baleLoader.texts#lowerPlattform",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleLoader#textLowering",
+    "new": "vehicle.baleLoader.texts#lowering",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleLoader#textOperatingPosition",
+    "new": "vehicle.baleLoader.texts#operatingPosition",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleLoader#textTilting",
+    "new": "vehicle.baleLoader.texts#tilting",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleLoader#textTransportPosition",
+    "new": "vehicle.baleLoader.texts#transportPosition",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleLoader#textUnload",
+    "new": "vehicle.baleLoader.texts#unload",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleLoader#textUnloadHere",
+    "new": "vehicle.baleLoader.texts#unloadHere",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleLoader.animations#grabberDropBaleReverseSpeed",
+    "new": "vehicle.baleLoader.animations.baleGrabber#dropBaleReverseSpeed",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baleLoader.animations#grabberDropToWork",
+    "new": "vehicle.baleLoader.animations.baleGrabber#dropToWork",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baleLoader.animations#rotatePlatform",
+    "new": "vehicle.baleLoader.animations.platform#rotate",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baleLoader.animations#rotatePlatformBack",
+    "new": "vehicle.baleLoader.animations.platform#rotateBack",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baleLoader.animations#rotatePlatformEmpty",
+    "new": "vehicle.baleLoader.animations.platform#rotateEmpty",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baleLoader.grabber.grabParticleSystem",
+    "new": "vehicle.baleLoader.grabber.effectNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.balePlaces",
+    "new": "vehicle.baleLoader.balePlaces",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleTypes",
+    "new": "vehicle.baleLoader.baleTypes",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleWrapper.grabber#index",
+    "new": "vehicle.baleWrapper.grabber#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleWrapper.roundBaleWrapper#baleIndex",
+    "new": "vehicle.baleWrapper.roundBaleWrapper#baleNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleWrapper.roundBaleWrapper#wrapperIndex",
+    "new": "vehicle.baleWrapper.roundBaleWrapper#wrapperNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleWrapper.squareBaleWrapper#baleIndex",
+    "new": "vehicle.baleWrapper.squareBaleWrapper#baleNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleWrapper.squareBaleWrapper#wrapperIndex",
+    "new": "vehicle.baleWrapper.squareBaleWrapper#wrapperNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baleloaderTurnedOnScrollers.baleloaderTurnedOnScroller",
+    "new": "vehicle.baleLoader.animationNodes.animationNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baler#toggleAutomaticDropTextNeg",
+    "new": "vehicle.baler.automaticDrop#textNeg",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baler#toggleAutomaticDropTextPos",
+    "new": "vehicle.baler.automaticDrop#textPos",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baler.baleAnimation#baleDropAnimTime",
+    "new": "vehicle.baler.baleTypes.baleType#dropAnimationTime",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baler.baleAnimation#baleNode",
+    "new": "vehicle.baler.baleTypes.baleType#baleNode",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baler.baleAnimation#baleScaleComponent",
+    "new": "vehicle.baler.baleTypes.baleType#scaleComponents",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baler.baleAnimation#firstBaleMarker",
+    "new": "Please adjust bale nodes to match the default balers",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baler.baleAnimation#node",
+    "new": "vehicle.baler.baleTypes.baleType#baleNode",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baler.baleAnimation#scaleNode",
+    "new": "vehicle.baler.baleTypes.baleType#scaleNode",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baler.baleAnimation#unloadAnimationName",
+    "new": "vehicle.baler.baleTypes.baleType#unloadAnimation",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baler.baleAnimation#unloadAnimationSpeed",
+    "new": "vehicle.baler.baleTypes.baleType#unloadAnimationSpeed",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baler.balerAlarm",
+    "new": "vehicle.fillUnit.fillUnitConfigurations.fillUnitConfiguration.fillUnits.fillUnit.alarmTriggers.alarmTrigger.alarmSound",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baler.balingAnimation#name",
+    "new": "vehicle.turnOnVehicle.turnedOnAnimation#name",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baler.fillParticleSystems",
+    "new": "vehicle.baler.fillEffect with effectClass 'ParticleEffect'",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.baler.uvScrollParts.uvScrollPart",
+    "new": "vehicle.baler.animationNodes.animationNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.base.components.component1",
+    "new": "vehicle.base.components.component",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.base.forcedMapHotspotType",
+    "new": "vehicle.base.mapHotspot#type",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.base.mapHotspot#hasDirection",
+    "new": null,
+    "era": "FS22 to FS25"
+  },
+  {
+    "old": "vehicle.base.schemaOverlay.default#name",
+    "new": "vehicle.base.schemaOverlay#name",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.base.schemaOverlay.selected#name",
+    "new": null,
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.base.schemaOverlay.turnedOn#name",
+    "new": null,
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.base.schemaOverlay.turnedOnSelected#name",
+    "new": null,
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.baseMaterial",
+    "new": null,
+    "era": "FS22 to FS25"
+  },
+  {
+    "old": "vehicle.baseMaterialConfigurations",
+    "new": "vehicle.designColorConfigurations",
+    "era": "FS22 to FS25"
+  },
+  {
+    "old": "vehicle.brakeForce",
+    "new": "vehicle.attachable.brakeForce#force",
+    "era": "FS17 to FS22"
+  },
+  {
+    "old": "vehicle.brakeLights.brakeLight#decoration",
+    "new": "vehicle.lights.brakeLights.brakeLight#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.brakeLights.brakeLight#realLight",
+    "new": "vehicle.lights.realLights.high.brakeLight#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.cameras.camera(0)#index",
+    "new": "vehicle.enterable.cameras.camera(0)#node",
+    "era": null
+  },
+  {
+    "old": "vehicle.cameras.camera(0).raycastNode(0)#index",
+    "new": "vehicle.enterable.cameras.camera(0).raycastNode(0)#node",
+    "era": null
+  },
+  {
+    "old": "vehicle.cameras.camera1",
+    "new": "vehicle.enterable.cameras.camera",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.characterNode",
+    "new": "vehicle.enterable.characterNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.characterNode#index",
+    "new": "vehicle.enterable.characterNode#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.combine.chopperSwitch",
+    "new": "vehicle.combine.swath and vehicle.combine.chopper",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.combine.folding#fillLevelThreshold",
+    "new": "vehicle.combine.folding#fillLevelThresholdPct",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.components",
+    "new": "vehicle.base.components",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.components.component",
+    "new": "vehicle.base.components.component",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.cover#animationName",
+    "new": "vehicle.cover.coverConfigurations.coverConfiguration.cover#openAnimation",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.cruiseControl",
+    "new": "vehicle.drivable.cruiseControl",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.cultivator.directionNode#index",
+    "new": "vehicle.cultivator.directionNode#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.cutter#convertedFillTypeCategories",
+    "new": "vehicle.cutter#fruitTypeConverter",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.cutter#startAnimationName",
+    "new": "vehicle.turnOnVehicle.turnOnAnimation#name",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.cutter#useWindrowed",
+    "new": "Windrows are now picked up if a fillTypeConverter is defined and the work area uses 'processPickupCutterArea'",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.cutter.reelspikes",
+    "new": "vehicle.cutter.rotationNodes.rotationNode or vehicle.turnOnVehicle.turnedOnAnimation",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.cutter.testAreas",
+    "new": "vehicle.workAreas.workArea.testAreas",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.cutter.threshingParticleSystems.emitterShape",
+    "new": "vehicle.cutter.fillEffect.effectNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.cutter.threshingParticleSystems.threshingParticleSystem",
+    "new": "vehicle.cutter.fillEffect.effectNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.cutter.turnedOnScrollers",
+    "new": "vehicle.cutter.animationNodes.animationNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.cylindered.movingParts#isActiveDirtyTimeOffset",
+    "new": null,
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.cylindered.movingParts.sounds",
+    "new": "vehicle.cylindered.sounds",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.cylinderedHydraulicSound",
+    "new": "vehicle.cylindered.sounds.hydraulic",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.designMaterial2Configurations",
+    "new": "vehicle.designColorConfigurations",
+    "era": "FS22 to FS25"
+  },
+  {
+    "old": "vehicle.designMaterial3Configurations",
+    "new": "vehicle.designColorConfigurations",
+    "era": "FS22 to FS25"
+  },
+  {
+    "old": "vehicle.designMaterialConfigurations",
+    "new": "vehicle.designColorConfigurations",
+    "era": "FS22 to FS25"
+  },
+  {
+    "old": "vehicle.differentialConfigurations",
+    "new": "vehicle.motorized.differentialConfigurations",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.driveGroundParticleSystems",
+    "new": "vehicle.wheels.wheelConfigurations.wheelConfiguration.wheels.wheel#hasParticles",
+    "era": "FS13 to FS15"
+  },
+  {
+    "old": "vehicle.dynamicMount#triggerIndex",
+    "new": "vehicle.dynamicMount#triggerNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.dynamicMountAttacher#index",
+    "new": "vehicle.dynamicMountAttacher#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.dynamicMountAttacher.mountCollisionMask",
+    "new": "vehicle.dynamicMountAttacher.fork",
+    "era": "FS22 to FS25"
+  },
+  {
+    "old": "vehicle.dynamicallyLoadedWheels",
+    "new": "vehicle.wheels.dynamicallyLoadedWheels",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.enterAnimation",
+    "new": "vehicle.enterable.enterAnimation",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.enterReferenceNode",
+    "new": "vehicle.enterable.enterReferenceNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.enterReferenceNode#index",
+    "new": "vehicle.enterable.enterReferenceNode#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.enterable.cameras.camera1",
+    "new": "vehicle.enterable.cameras.camera",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.enterable.characterNode#index",
+    "new": "vehicle.enterable.characterNode#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.enterable.enterReferenceNode#index",
+    "new": "vehicle.enterable.enterReferenceNode#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.enterable.exitPoint#index",
+    "new": "vehicle.enterable.exitPoint#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.enterable.nicknameRenderNode#index",
+    "new": "vehicle.enterable.nicknameRenderNode#node",
+    "era": "FS19 to FS21"
+  },
+  {
+    "old": "vehicle.exitPoint",
+    "new": "vehicle.enterable.exitPoint",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.exitPoint#index",
+    "new": "vehicle.enterable.exitPoint#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.filename",
+    "new": "vehicle.base.filename",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.fillAutoAimTargetNode",
+    "new": "vehicle.fillUnit.fillUnitConfigurations.fillUnitConfiguration.fillUnits.fillUnit.autoAimTargetNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.fillPlanes.fillPlane",
+    "new": "vehicle.fillUnit.fillUnitConfigurations.fillUnitConfiguration.fillUnits.fillUnit.fillPlane",
+    "era": null
+  },
+  {
+    "old": "vehicle.fillScale#value",
+    "new": "vehicle.baler#fillScale",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.foldable.foldingParts",
+    "new": "vehicle.foldable.foldingConfigurations.foldingConfiguration.foldingParts",
+    "era": "FS19 to FS21"
+  },
+  {
+    "old": "vehicle.foldable.foldingParts#closeCoverOnFold",
+    "new": "vehicle.cover.coverConfigurations.coverConfiguration.cover#closeCoverIfNotAllowed",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.foldable.foldingParts#onlyFoldOnDetach",
+    "new": "vehicle.attachable#allowFoldingWhileAttached",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.foldable.foldingParts#onlyFoldOnEmpty",
+    "new": "vehicle.fillUnit#allowFoldingWhileFilled",
+    "era": null
+  },
+  {
+    "old": "vehicle.foldable.foldingParts#turnOffOnFold",
+    "new": "vehicle.turnOnVehicle#turnOffIfNotAllowed",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.foldingParts",
+    "new": "vehicle.foldable.foldingConfigurations.foldingConfiguration.foldingParts",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.forageWagon#turnedOnTipScrollerSpeedFactor",
+    "new": null,
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.forceSelectionOnAttach#value",
+    "new": "vehicle.inputAttacherJoints.inputAttacherJoint#forceSelectionOnAttach",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.forcedMapHotspotType",
+    "new": "vehicle.base.mapHotspot#type",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.fruitPreparer#onlyActiveWhenLowered",
+    "new": null,
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.fruitPreparer#useReelStateToTurnOn",
+    "new": null,
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.fuelCapacity",
+    "new": "vehicle.motorized.consumerConfigurations.consumerConfiguration.consumer#capacity",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.grabParticleSystem",
+    "new": "vehicle.baleLoader.grabber.grabParticleSystem",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.groundParticleAnimations.groundParticle",
+    "new": "vehicle.workParticles.particle",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.groundParticleAnimations.groundParticleAnimation",
+    "new": "vehicle.workParticles.particleAnimation",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.hubColor",
+    "new": "vehicle.wheels.hubs.color0",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.indoorHud.cruiseControl",
+    "new": "vehicle.drivable.dashboards.dashboard with valueType 'cruiseControl'",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.indoorHud.fuel",
+    "new": "fillUnit.dashboard with valueType 'fillLevel'",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.indoorHud.fuelUsage",
+    "new": "vehicle.motorized.dashboards.dashboard with valueType 'fuelUsage'",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.indoorHud.operatingTime",
+    "new": "vehicle.enterable.dashboards.dashboard with valueType 'operatingTime'",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.indoorHud.rpm",
+    "new": "vehicle.motorized.dashboards.dashboard with valueType 'rpm'",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.indoorHud.speed",
+    "new": "vehicle.motorized.dashboards.dashboard with valueType 'speed'",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.indoorHud.time",
+    "new": "vehicle.enterable.dashboards.dashboard with valueType 'time'",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.indoorHud.workedHectars",
+    "new": "vehicle.combine.dashboards.dashboard with valueType 'workedHectars'",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.inputAttacherJointConfigurations",
+    "new": "vehicle.attachable.inputAttacherJointConfigurations",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.inputAttacherJoints",
+    "new": "vehicle.attachable.inputAttacherJoints",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.isDefaultLowered",
+    "new": "vehicle.inputAttacherJoints.inputAttacherJoint#isDefaultLowered",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.leveler.levelerNode#index",
+    "new": "vehicle.leveler.levelerNode#node",
+    "era": null
+  },
+  {
+    "old": "vehicle.leveler.levelerNode(0)#maxDropHeight",
+    "new": null,
+    "era": null
+  },
+  {
+    "old": "vehicle.leveler.levelerNode(0)#minDropHeight",
+    "new": null,
+    "era": null
+  },
+  {
+    "old": "vehicle.levelerEffects",
+    "new": "vehicle.leveler.effects",
+    "era": null
+  },
+  {
+    "old": "vehicle.lights.high.light#decoration",
+    "new": "vehicle.lights.defaultLights#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.lights.high.light#realLight",
+    "new": "vehicle.lights.realLights.high.light#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.lights.low.light#decoration",
+    "new": "vehicle.lights.defaultLights#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.lights.low.light#realLight",
+    "new": "vehicle.lights.realLights.low.light#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.lights.states.aiState#lightTypes",
+    "new": "vehicle.lights.states.automaticState#lightTypes",
+    "era": "FS22 to FS25"
+  },
+  {
+    "old": "vehicle.lights.states.aiState#lightTypesWork",
+    "new": "vehicle.lights.states.automaticState#lightTypesWork",
+    "era": "FS22 to FS25"
+  },
+  {
+    "old": "vehicle.lowerAnimation",
+    "new": "vehicle.attachable.lowerAnimation",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.manureBarrel#toolAttachAnimName",
+    "new": "vehicle.attacherJoints.attacherJoint.objectChange",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.maxRotatedTimeSpeed#value",
+    "new": null,
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.maximalAirConsumptionPerFullStop",
+    "new": "vehicle.attachable.airConsumer#usage(is now in usage per second at full brake power)",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.measurementNodes.measurementNode",
+    "new": "vehicle.fillUnit.fillUnitConfigurations.fillUnitConfiguration.fillUnits.fillUnit.measurementNodes.measurementNode",
+    "era": null
+  },
+  {
+    "old": "vehicle.mirrors.mirror(0)#index",
+    "new": "vehicle.enterable.mirrors.mirror(0)#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.mixerWagon.baleTrigger#index",
+    "new": "vehicle.mixerWagon.baleTrigger#node",
+    "era": "FS19 to FS19"
+  },
+  {
+    "old": "vehicle.mixerWagon.baleTrigger#node",
+    "new": "vehicle.mixerWagon.baleTriggers.baleTrigger#node",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.mixerWagonBaleTrigger#index",
+    "new": "vehicle.mixerWagon.baleTrigger#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.mixerWagonPickupSound",
+    "new": "vehicle.turnOnVehicle.sounds.work",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.mixerWagonPickupStartSound",
+    "new": "vehicle.turnOnVehicle.sounds.start",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.mixerWagonPickupStopSound",
+    "new": "vehicle.turnOnVehicle.sounds.stop",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.mixerWagonRotatingParts.mixerWagonScroller",
+    "new": "vehicle.mixerWagon.pickupAnimationNodes.pickupAnimationNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.motorConfigurations",
+    "new": "vehicle.motorized.motorConfigurations",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.motorized.exhaustFlap#index",
+    "new": "vehicle.motorized.exhaustFlap#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.motorized.exhaustParticleSystems#count",
+    "new": null,
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.motorized.exhaustParticleSystems.exhaustParticleSystem1",
+    "new": "vehicle.motorized.exhaustParticleSystems.exhaustParticleSystem",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.motorized.motorConfigurations.motorConfiguration(?).fuelCapacity",
+    "new": "vehicle.motorized.consumerConfigurations.consumerConfiguration.consumer#capacity",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.movingParts",
+    "new": "vehicle.cylindered.movingParts",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.movingTools",
+    "new": "vehicle.cylindered.movingTools",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.mowerEffects.mowerEffect",
+    "new": "vehicle.mower.dropEffects.dropEffect",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.mowerEffects.mowerEffect#mowerCutArea",
+    "new": "vehicle.mower.dropEffects.dropEffect#dropAreaIndex",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.mowerSound",
+    "new": "vehicle.turnOnVehicle.sounds.work",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.mowerStartSound",
+    "new": "vehicle.turnOnVehicle.sounds.start",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.mowerStopSound",
+    "new": "vehicle.turnOnVehicle.sounds.stop",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.needsActivation#value",
+    "new": "vehicle.sowingMachine.needsActivation#value",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.needsLowering",
+    "new": "vehicle.inputAttacherJoints.inputAttacherJoint#needsLowering",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.nicknameRenderNode",
+    "new": "vehicle.enterable.nicknameRenderNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.onlyActiveWhenLowered#value",
+    "new": "vehicle.plow.onlyActiveWhenLowered#value",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.pipeEffect",
+    "new": "vehicle.dischargeable.dischargeNode.effects",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.ploughDirectionNode#index",
+    "new": "vehicle.plow.directionNode#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.receivingHopper#dischargeInfoIndex",
+    "new": "Dischargeable functionalities",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.receivingHopper#unloadInfoIndex",
+    "new": "Dischargeable functionalities",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.receivingHopper#unloadingDelay",
+    "new": "Dischargeable functionalities",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.receivingHopper.boxTrigger#boxSpawnPlaceIndex",
+    "new": "vehicle.receivingHopper.boxes#spawnPlaceNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.receivingHopper.boxTrigger#index",
+    "new": "Dischargeable functionalities",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.receivingHopper.boxTrigger#litersPerMinute",
+    "new": "Dischargeable functionalities",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.receivingHopper.boxTrigger.box(0)",
+    "new": "vehicle.receivingHopper.boxes.box(0)",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.receivingHopper.fillEffect",
+    "new": "Dischargeable functionalities",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.receivingHopper.fillScrollerNodes.fillScrollerNode",
+    "new": "Dischargeable functionalities",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.receivingHopper.raycastNode#index",
+    "new": "Dischargeable functionalities",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.receivingHopper.raycastNode#raycastLength",
+    "new": "Dischargeable functionalities",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.receivingHopper.tipTrigger#index",
+    "new": "Dischargeable functionalities",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.reverseDriving.steering#reversedIndex",
+    "new": "vehicle.reverseDriving.steeringWheel#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.reverseDriving.steering#reversedNode",
+    "new": "vehicle.reverseDriving.steeringWheel#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.reverseLights.reverseLight#decoration",
+    "new": "vehicle.lights.reverseLights.reverseLight#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.reverseLights.reverseLight#realLight",
+    "new": "vehicle.lights.realLights.high.reverseLight#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.ridgeMarker.ridgeMarker",
+    "new": "vehicle.ridgeMarker.marker",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.ridgeMarkers",
+    "new": "vehicle.ridgeMarker",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.ridgeMarkers.ridgeMarker",
+    "new": "vehicle.ridgeMarker.marker",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.rimColor",
+    "new": "vehicle.wheels.rimColor",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.rollerSound",
+    "new": "vehicle.roller.sounds.work",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.rotateLeftToMax#value",
+    "new": "vehicle.plow.rotateLeftToMax#value",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.rotationPart",
+    "new": "vehicle.plow.rotationPart",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.schemaOverlay#attacherJointPosition",
+    "new": "vehicle.base.schemaOverlay#attacherJointPosition",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.schemaOverlay#basePosition",
+    "new": "vehicle.base.schemaOverlay#basePosition",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.schemaOverlay#file",
+    "new": null,
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.schemaOverlay#fileSelected",
+    "new": null,
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.schemaOverlay#fileSelectedTurnedOn",
+    "new": null,
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.schemaOverlay#fileTurnedOn",
+    "new": null,
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.schemaOverlay#height",
+    "new": null,
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.schemaOverlay#invisibleBorderLeft",
+    "new": "vehicle.base.schemaOverlay#invisibleBorderLeft",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.schemaOverlay#invisibleBorderRight",
+    "new": "vehicle.base.schemaOverlay#invisibleBorderRight",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.schemaOverlay#width",
+    "new": null,
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.schemaOverlay.attacherJoint",
+    "new": "vehicle.attacherJoints.attacherJoint.schema",
+    "era": null
+  },
+  {
+    "old": "vehicle.shovel#pickUpLength",
+    "new": "vehicle.shovel.shovelNode#length",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.shovel#pickUpNeedsToBeTurnedOn",
+    "new": "vehicle.shovel.shovelNode#needsActivation",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.shovel#pickUpNode",
+    "new": "vehicle.shovel.shovelNode#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.shovel#pickUpRequiresMovement",
+    "new": "vehicle.shovel.shovelNode#needsMovement",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.shovel#pickUpWidth",
+    "new": "vehicle.shovel.shovelNode#width",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.shovel#pickUpYOffset",
+    "new": null,
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.showChangeToolSelectionHelp",
+    "new": null,
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.size#length",
+    "new": "vehicle.base.size#length",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.size#lengthOffset",
+    "new": "vehicle.base.size#lengthOffset",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.size#width",
+    "new": "vehicle.base.size#width",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.size#widthOffset",
+    "new": "vehicle.base.size#widthOffset",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.sowingEffects",
+    "new": "vehicle.sowingMachine.effects",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.sowingEffectsWithFixedFillType",
+    "new": "vehicle.sowingMachine.fixedEffects",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.sowingMachine#supportsAiWithoutSowingMachine",
+    "new": "vehicle.turnOnVehicle.aiRequiresTurnOn",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.sowingMachine.directionNode#index",
+    "new": "vehicle.sowingMachine.directionNode#node",
+    "era": "FS19 to FS21"
+  },
+  {
+    "old": "vehicle.speedLimit#value",
+    "new": "vehicle.base.speedLimit#value",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.speedRotScale#offset",
+    "new": "vehicle.drivable.speedRotScale#offset",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.speedRotScale#scale",
+    "new": "vehicle.drivable.speedRotScale#scale",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.speedRotatingParts.speedRotatingPart(0)#index",
+    "new": "vehicle.speedRotatingParts.speedRotatingPart(0)#node",
+    "era": null
+  },
+  {
+    "old": "vehicle.sprayParticles.emitterShape",
+    "new": "vehicle.sprayer.effects.effectNode#effectClass = 'ParticleEffect'",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.sprayer#needsTankActivation",
+    "new": null,
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.steering#index",
+    "new": "vehicle.drivable.steeringWheel#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.steering#node",
+    "new": "vehicle.drivable.steeringWheel#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.steeringAxleAngleScale",
+    "new": "vehicle.attachable.steeringAxleAngleScale",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.steeringAxleNode#index",
+    "new": "vehicle.base.steeringAxle#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.strawBlower.balePickupTrigger",
+    "new": "vehicle.autoLoaderBales.trigger",
+    "era": "FS22 to FS25"
+  },
+  {
+    "old": "vehicle.strawBlower.baleTrigger#index",
+    "new": "vehicle.strawBlower.baleTrigger#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.strawBlower.doorAnimation#name",
+    "new": "vehicle.foldable.foldingParts.foldingPart.animationName",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.stumpCutter#cutFullTreeThreshold",
+    "new": "vehicle.stumpCutter.cutNode#cutFullTreeThreshold",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.stumpCutter#cutNode",
+    "new": "vehicle.stumpCutter.cutNode#node",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.stumpCutter#cutPartThreshold",
+    "new": "vehicle.stumpCutter.cutNode#cutPartThreshold",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.stumpCutter#cutSizeY",
+    "new": "vehicle.stumpCutter.cutNode#cutSizeY",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.stumpCutter#cutSizeZ",
+    "new": "vehicle.stumpCutter.cutNode#cutSizeZ",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.stumpCutter.emitterShape(0)",
+    "new": "vehicle.stumpCutter.effects.effectNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.stumpCutter.particleSystem(0)",
+    "new": "vehicle.stumpCutter.effects.effectNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.stumpCutterIdleSound",
+    "new": "vehicle.stumpCutter.sounds.idle",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.stumpCutterStartSound",
+    "new": "vehicle.stumpCutter.sounds.start",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.stumpCutterStopSound",
+    "new": "vehicle.stumpCutter.sounds.stop",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.stumpCutterWorkSound",
+    "new": "vehicle.stumpCutter.sounds.work",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.support",
+    "new": "vehicle.attachable.support",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.tipAnimations.tipAnimation",
+    "new": "vehicle.trailer.trailerConfigurations.trailerConfiguration.trailer.tipSide",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.tipOcclusionAreas.tipOcclusionArea",
+    "new": "vehicle.tipOccluder.occlusionArea",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.tipRotationNodes.tipRotationNode",
+    "new": "vehicle.trailer.trailerConfigurations.trailerConfiguration.trailer.tipSide.animationNodes.animationNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.tipScrollerNodes.tipScrollerNode",
+    "new": "vehicle.trailer.trailerConfigurations.trailerConfiguration.trailer.tipSide.animationNodes.animationNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.toolCameras",
+    "new": "vehicle.attachable.toolCameras",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.topReferenceNode#index",
+    "new": "vehicle.attacherJoint#topReferenceNode",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.transmission",
+    "new": "vehicle.motorized.motorConfigurations.motorConfiguration(?).transmission",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.treePlanterSound",
+    "new": "vehicle.treePlanter.sounds.work",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.treeSaw.cutParticleSystems.emitterShape(0)",
+    "new": "vehicle.treeSaw.effects.effectNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.treeSaw.cutSound",
+    "new": "vehicle.treeSaw.sounds.cut",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.treeSaw.sawSound",
+    "new": "vehicle.treeSaw.sounds.saw",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.turnLights.turnLightLeft#decoration",
+    "new": "vehicle.lights.turnLights.turnLightLeft#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.turnLights.turnLightLeft#realLight",
+    "new": "vehicle.lights.realLights.high.turnLightLeft#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.turnLights.turnLightRight#decoration",
+    "new": "vehicle.lights.turnLights.turnLightRight#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.turnLights.turnLightRight#realLight",
+    "new": "vehicle.lights.realLights.high.turnLightRight#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.turnOnAnimation#name",
+    "new": "vehicle.turnOnVehicle.turnedAnimation#name",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.turnOnAnimation#speed",
+    "new": "vehicle.turnOnVehicle.turnedAnimation#turnOnSpeedScale",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.turnOnSettings#animationName",
+    "new": "vehicle.turnOnVehicle.turnedAnimation#name",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.turnOnSettings#isAlwaysTurnedOn",
+    "new": "vehicle.turnOnVehicle#isAlwaysTurnedOn",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.turnOnSettings#needsSelection",
+    "new": null,
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.turnOnSettings#toggleButton",
+    "new": "vehicle.turnOnVehicle#toggleButton",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.turnOnSettings#turnOffSpeedScale",
+    "new": "vehicle.turnOnVehicle.turnedAnimation#turnOffSpeedScale",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.turnOnSettings#turnOffText",
+    "new": "vehicle.turnOnVehicle#turnOffText",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.turnOnSettings#turnOnSpeedScale",
+    "new": "vehicle.turnOnVehicle.turnedAnimation#turnOnSpeedScale",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.turnOnSettings#turnOnText",
+    "new": "vehicle.turnOnVehicle#turnOnText",
+    "era": "FS15 to FS17"
+  },
+  {
+    "old": "vehicle.turnedOnRotationNodes.turnedOnRotationNode(0)",
+    "new": "vehicle.treePlanter.animationNodes.animationNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.turnedOnScrollers",
+    "new": "vehicle.cutter.animationNodes.animationNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.typeDesc",
+    "new": "vehicle.base.typeDesc",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.useDirectPlanting",
+    "new": "vehicle.sowingMachine.useDirectPlanting#value",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.vehicle.fruitPreparerSound",
+    "new": "vehicle.fruitPreparer.sounds.work",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.wheel.hubs.rimColor.color0",
+    "new": "vehicle.wheels.hubMaterial",
+    "era": "FS22 to FS25"
+  },
+  {
+    "old": "vehicle.wheel.hubs.rimColor.color1",
+    "new": "vehicle.wheels.hubBoltMaterial",
+    "era": "FS22 to FS25"
+  },
+  {
+    "old": "vehicle.wheel.rimColor",
+    "new": "vehicle.wheels.rimMaterial",
+    "era": "FS22 to FS25"
+  },
+  {
+    "old": "vehicle.wheelConfigurations.wheelConfiguration",
+    "new": "vehicle.wheels.wheelConfigurations.wheelConfiguration",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.wheelConfigurations.wheelConfiguration.wheels.wheel#repr",
+    "new": "vehicle.wheels.wheelConfigurations.wheelConfiguration.wheels.wheel.physics#repr",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.wheels.wheel",
+    "new": "vehicle.wheels.wheelConfigurations.wheelConfiguration.wheels.wheel",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.wheels.wheel#repr",
+    "new": "vehicle.wheels.wheelConfigurations.wheelConfiguration.wheels.wheel.physics#repr",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.wheels.wheelConfigurations.wheelConfiguration.wheels.wheel#configIndex",
+    "new": "vehicle.wheels.wheelConfigurations.wheelConfiguration.wheels.wheel#configId",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.wheels.wheelConfigurations.wheelConfiguration.wheels.wheel#repr",
+    "new": "vehicle.wheels.wheelConfigurations.wheelConfiguration.wheels.wheel.physics#repr",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.windrower.rakes.rake",
+    "new": "vehicle.windrower.animationNodes.animationNode with type 'RotationAnimationSpikes'",
+    "era": "FS19 to FS22"
+  },
+  {
+    "old": "vehicle.windrowerParticleSystems",
+    "new": "vehicle.windrower.effects",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.windrowerSound",
+    "new": "vehicle.windrower.sounds.work",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.woodHarvester.cutParticleSystems",
+    "new": "vehicle.woodHarvester.cutEffects",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.woodHarvester.cutSound",
+    "new": "vehicle.woodHarvester.sounds.cut",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.woodHarvester.delimbParticleSystems",
+    "new": "vehicle.woodHarvester.delimbEffects",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.woodHarvester.delimbSound",
+    "new": "vehicle.woodHarvester.sounds.delimb",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.woodHarvester.forwardingWheels.wheel(0)",
+    "new": "vehicle.woodHarvester.forwardingNodes.animationNode",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.woodHarvester.treeSizeMeasure#index",
+    "new": "vehicle.woodHarvester.treeSizeMeasure#node",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.workAreas.workArea(0)#foldMaxLimit",
+    "new": "vehicle.workAreas.workArea(0).folding#maxLimit",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.workAreas.workArea(0)#foldMinLimit",
+    "new": "vehicle.workAreas.workArea(0).folding#minLimit",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.workAreas.workArea(0)#heightIndex",
+    "new": "vehicle.workAreas.workArea(0).area#heightIndex",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.workAreas.workArea(0)#refNodeIndex",
+    "new": "vehicle.workAreas.workArea(0).groundReferenceNode#index",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.workAreas.workArea(0)#startIndex",
+    "new": "vehicle.workAreas.workArea(0).area#startIndex",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.workAreas.workArea(0)#widthIndex",
+    "new": "vehicle.workAreas.workArea(0).area#widthIndex",
+    "era": "FS17 to FS19"
+  },
+  {
+    "old": "vehicle.wrapper",
+    "new": "vehicle.baleWrapper",
+    "era": "FS17 to FS19"
+  }
+]

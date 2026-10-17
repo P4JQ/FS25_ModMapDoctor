@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<vehicle type="brokenBaleType">
+    <storeData>
+        <name>Broken Bale Loader</name>
+        <category>bailing</category>
+        <price>5000</price>
+    </storeData>
+
+    <base>
+        <typeDesc>$l10n_typeDesc_baleLoader</typeDesc>
+        <filename>broken.i3d</filename>
+    </base>
+
+    <!-- Requires specialization baleLoader — NOT registered on brokenBaleType -->
+    <baleLoader>
+        <baleTypes>
+            <baleType isRoundBale="true" width="1.2" height="1.2" length="1.2" />
+        </baleTypes>
+    </baleLoader>
+
+    <!-- Unknown / typo type test would be separate; this file uses custom type -->
+    <fillUnit>
+        <fillUnitConfigurations>
+            <fillUnitConfiguration>
+                <fillUnits>
+                    <fillUnit fillTypes="wheat" capacity="10" />
+                </fillUnits>
+            </fillUnitConfiguration>
+        </fillUnitConfigurations>
+    </fillUnit>
+</vehicle>

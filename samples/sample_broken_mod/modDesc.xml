@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="92">
+    <author>Broken Sample</author>
+    <version>0.0.1.0</version>
+    <!-- iconFilename intentionally missing -->
+
+    <extraSourceFiles>
+        <sourceFile filename="scripts/DoesNotExist.lua" />
+        <sourceFile filename="Scripts/SampleScript.lua" />
+    </extraSourceFiles>
+
+    <!-- Custom type WITHOUT baleLoader specialization -->
+    <vehicleTypes>
+        <type name="brokenBaleType" parent="trailer" className="Vehicle" filename="$dataS/scripts/vehicles/Vehicle.lua">
+            <specialization name="fillUnit" />
+            <specialization name="trailer" />
+        </type>
+    </vehicleTypes>
+
+    <storeItems>
+        <storeItem xmlFilename="vehicles/brokenBaleLoader/brokenBaleLoader.xml" />
+    </storeItems>
+</modDesc>

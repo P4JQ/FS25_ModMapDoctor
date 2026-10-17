@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<vehicle type="doctorSampleTrailer">
+    <storeData>
+        <name>Sample Trailer</name>
+        <category>trailers</category>
+        <price>1000</price>
+    </storeData>
+
+    <base>
+        <typeDesc>$l10n_typeDesc_tipper</typeDesc>
+        <filename>sampleTrailer.i3d</filename>
+    </base>
+
+    <attacherJoints>
+        <attacherJoint node="0>" jointType="trailer" />
+    </attacherJoints>
+
+    <fillUnit>
+        <fillUnitConfigurations>
+            <fillUnitConfiguration>
+                <fillUnits>
+                    <fillUnit unitText="$l10n_unit_literShort" fillTypes="wheat" capacity="1000" />
+                </fillUnits>
+            </fillUnitConfiguration>
+        </fillUnitConfigurations>
+    </fillUnit>
+
+    <dischargeable>
+        <dischargeNode node="0>" emptySpeed="100" />
+    </dischargeable>
+
+    <trailer>
+        <tipping animationName="tipAnimation" />
+    </trailer>
+</vehicle>

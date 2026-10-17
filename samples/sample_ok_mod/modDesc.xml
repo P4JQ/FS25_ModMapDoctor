@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<modDesc descVersion="92">
+    <author>FS25 Mod &amp; Map Doctor</author>
+    <version>1.0.0.0</version>
+    <title>
+        <en>Sample OK Mod</en>
+    </title>
+    <description>
+        <en>Clean sample used to smoke-test the XML Validator (modDesc + vehicle).</en>
+    </description>
+    <iconFilename>icon.png</iconFilename>
+    <multiplayer supported="true" />
+
+    <extraSourceFiles>
+        <sourceFile filename="scripts/SampleScript.lua" />
+    </extraSourceFiles>
+
+    <vehicleTypes>
+        <type name="doctorSampleTrailer" parent="trailer" className="Vehicle" filename="$dataS/scripts/vehicles/Vehicle.lua">
+            <specialization name="fillUnit" />
+            <specialization name="dischargeable" />
+            <specialization name="trailer" />
+            <specialization name="attacherJoints" />
+        </type>
+    </vehicleTypes>
+
+    <storeItems>
+        <storeItem xmlFilename="vehicles/sampleTrailer/sampleTrailer.xml" />
+    </storeItems>
+</modDesc>

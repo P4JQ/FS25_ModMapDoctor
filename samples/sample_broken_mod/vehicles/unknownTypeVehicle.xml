@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<vehicle type="thisTypeDoesNotExistAnywhere">
+    <storeData>
+        <name>Unknown Type Vehicle</name>
+        <price>1</price>
+    </storeData>
+    <base>
+        <filename>x.i3d</filename>
+    </base>
+</vehicle>
