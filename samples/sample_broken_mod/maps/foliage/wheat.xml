@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<foliageType>
+    <fruitType name="WHEAT">
+        <harvest litersPerSqm="0.89">
+            <transition src="green" target="doesNotExist" />
+        </harvest>
+        <windrow fillType="NOT_STRAW" />
+    </fruitType>
+    <foliageLayer densityMapChannelOffset="0" numDensityMapChannels="4">
+        <foliageState name="green" isGrowing="true" isWithered="true" isDestructibleByWheel="true" />
+        <foliageState name="dead" isWithered="true" />
+    </foliageLayer>
+</foliageType>

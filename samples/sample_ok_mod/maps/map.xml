@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<map>
+    <!-- filename is the attribute XMLUtil.loadDataFromMapXML reads via key .. "#filename". -->
+    <fillTypes filename="fillTypes.xml" />
+    <fruitTypes filename="fruitTypes.xml" />
+</map>

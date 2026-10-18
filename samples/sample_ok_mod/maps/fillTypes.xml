@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<map>
+    <fillTypes>
+        <fillType name="WHEAT" title="Wheat" />
+        <fillType name="STRAW" title="Straw" />
+    </fillTypes>
+    <fillTypeCategories>
+        <fillTypeCategory name="GRAIN">WHEAT</fillTypeCategory>
+    </fillTypeCategories>
+    <fillTypeConverters>
+        <fillTypeConverter name="MOWER">
+            <converter from="WHEAT" to="STRAW" factor="1.0" />
+        </fillTypeConverter>
+    </fillTypeConverters>
+</map>

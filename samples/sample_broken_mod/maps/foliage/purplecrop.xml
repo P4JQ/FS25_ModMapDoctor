@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<foliageType>
+    <!-- PURPLECROP is not a vanilla fill type and this mod does not define it. -->
+    <fruitType name="PURPLECROP">
+        <windrow fillType="STRAW" />
+    </fruitType>
+    <foliageLayer numDensityMapChannels="4">
+        <foliageState name="green" isGrowing="true" />
+    </foliageLayer>
+</foliageType>

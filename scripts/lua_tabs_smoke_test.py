@@ -105,6 +105,8 @@ def run() -> int:
         pump(window, 10)
         text = validator.results.get("1.0", "end")
         check("[Lua Audit]" in text, "results contain the [Lua Audit] section")
+        check("[Fill Types & Foliage]" in text, "results contain the fill-type section")
+        check("FILL-004" in text and "FRUIT-008" in text, "broken sample reports fill and foliage findings")
         check("LUA-EVT-004" in text, "broken sample reports LUA-EVT-004")
         check("LUA-OLD-001" in text, "broken sample reports LUA-OLD-001")
         check("FAILED" in validator.status_var.get(), "status line says FAILED")
@@ -115,6 +117,7 @@ def run() -> int:
         pump(window, 10)
         text = validator.results.get("1.0", "end")
         check("[Lua Audit]" in text and "LUA-" not in text, "ok sample: Lua audit without findings")
+        check("[Fill Types & Foliage]" in text and "FILL-" not in text and "FRUIT-" not in text, "ok sample: fill and foliage section is clean")
         check("PASSED" in validator.status_var.get(), "ok sample: status line says PASSED")
         base.screenshot(window, "21_auditor_ok")
 

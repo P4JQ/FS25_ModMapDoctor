@@ -33,12 +33,12 @@ class XmlValidatorTab(ctk.CTkFrame):
         hint = ctk.CTkLabel(
             self,
             text=(
-                "Select a mod root folder. Runs [modDesc.xml] checks first, then "
-                "[Vehicle Validation] (type attribute, custom vehicleTypes, and "
-                "XML blocks vs registered specializations), then [Lua Audit]: every "
-                ".lua file registered in modDesc.xml (extraSourceFiles, specializations, "
-                "events ...) and every file it loads with source() is checked for "
-                "multiplayer sync problems and outdated API calls."
+                "Select a mod root folder. Runs [modDesc.xml], then [Vehicle Validation] "
+                "(type attribute, custom vehicleTypes, and XML blocks vs registered "
+                "specializations), then [Fill Types & Foliage] (fillTypes.xml, fruitTypes "
+                "and foliage XML: upper-case names, categories, converters the loader "
+                "drops silently, and foliage states), then [Lua Audit] for every .lua "
+                "file registered in modDesc.xml and every file it loads with source()."
             ),
             wraplength=720,
             justify="left",

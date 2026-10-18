@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<map>
+    <fruitTypes>
+        <fruitType />
+        <fruitType filename="foliage/wheat.xml" />
+        <fruitType filename="foliage/purplecrop.xml" />
+        <fruitType filename="foliage/missing.xml" />
+    </fruitTypes>
+    <fruitTypeCategories>
+        <fruitTypeCategory name="GRAIN">WHEAT PURPLECROP</fruitTypeCategory>
+    </fruitTypeCategories>
+    <fruitTypeConverters>
+        <fruitTypeConverter name="MOWER">
+            <converter from="PURPLECROP" to="NOT_A_FILL" />
+        </fruitTypeConverter>
+    </fruitTypeConverters>
+</map>

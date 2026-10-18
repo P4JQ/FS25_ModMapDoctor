@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<map>
+    <fillTypes>
+        <!-- Stored as WHEAT. The mixed case is accepted, then upper-cased. -->
+        <fillType name="wheat" title="Wheat" />
+        <fillType name="STRAW" title="Straw" />
+        <fillType name="BAD NAME" title="Not an identifier" />
+    </fillTypes>
+    <fillTypeCategories>
+        <fillTypeCategory name="GRAIN">WHEAT MISSINGCROP</fillTypeCategory>
+    </fillTypeCategories>
+    <fillTypeConverters>
+        <fillTypeConverter name="MOWER">
+            <!-- Names resolve, but #factor is nil, so the loader drops the rule. -->
+            <converter from="WHEAT" to="STRAW" />
+            <!-- factor is set, but neither name is a fill type. -->
+            <converter from="NOPE" to="ALSO_NOPE" factor="1" />
+        </fillTypeConverter>
+    </fillTypeConverters>
+    <fillTypeSounds>
+        <fillTypeSound fillTypes="NOT_A_FILL">
+            <sound file="dummy.ogg" />
+        </fillTypeSound>
+    </fillTypeSounds>
+</map>

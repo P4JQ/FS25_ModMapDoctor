@@ -6,12 +6,14 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from app.core.models import ValidationReport
+from app.validators.fill_fruit_auditor import FillFruitAuditor
 from app.validators.lua_auditor import LuaAuditor
 from app.validators.moddesc_validator import ModDescValidator
 from app.validators.vehicle_validator import VehicleValidator
 
 SECTION_MODDESC = "modDesc.xml"
 SECTION_VEHICLES = "Vehicle Validation"
+SECTION_FILL_FRUIT = "Fill Types & Foliage"
 SECTION_LUA = "Lua Audit"
 
 
@@ -65,11 +67,12 @@ class ValidationSuiteResult:
 
 
 def run_xml_validation_suite(mod_root: Path, *, include_lua: bool = True) -> ValidationSuiteResult:
-    """Execute modDesc validation, vehicle validation, then the Lua audit.
+    """Execute modDesc, vehicle, fill-type/foliage, then the Lua audit.
 
     The Lua audit reads the files registered in modDesc.xml (extraSourceFiles,
     custom specializations ...) and the files they load with source(); pass
-    ``include_lua=False`` to run the XML stages only.
+    ``include_lua=False`` to run the XML stages only. The fill-type section
+    always runs: it reads fillTypes, fruitTypes and foliage XML in the folder.
     """
     root = mod_root.resolve()
     print(f"[Pipeline] Starting validation suite for: {root}")
@@ -77,6 +80,7 @@ def run_xml_validation_suite(mod_root: Path, *, include_lua: bool = True) -> Val
     sections: list[tuple[str, ValidationReport]] = [
         (SECTION_MODDESC, ModDescValidator(root).validate()),
         (SECTION_VEHICLES, VehicleValidator(root).validate()),
+        (SECTION_FILL_FRUIT, FillFruitAuditor(root).audit()),
     ]
     if include_lua:
         sections.append((SECTION_LUA, LuaAuditor(root).audit()))
