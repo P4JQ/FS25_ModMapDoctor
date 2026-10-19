@@ -15,6 +15,12 @@ REQUIRED_TEXT_TAGS: tuple[str, ...] = (
     "iconFilename",
 )
 
+# main.lua sets these, and mods.lua refuses to load a mod outside the range
+# before any of its scripts run. Evidence: fs25-claude-skill
+# references/giants-source/VERIFIED-FACTS.md (main.lua:29-30, mods.lua).
+DESC_VERSION_MIN = 90
+DESC_VERSION_MAX = 111
+
 
 class ModDescValidator:
     """Phase-1 validator focused on modDesc.xml integrity."""
@@ -117,19 +123,40 @@ class ModDescValidator:
             )
             return
 
-        desc_version = root.get("descVersion")
+        desc_version = (root.get("descVersion") or "").strip()
         if not desc_version:
             report.add(
                 Severity.WARNING,
                 "Missing descVersion attribute on <modDesc> (recommended for FS25).",
                 location="modDesc",
             )
-        else:
+            return
+
+        try:
+            revision = int(desc_version)
+        except ValueError:
             report.add(
-                Severity.INFO,
-                f"descVersion = {desc_version}",
+                Severity.ERROR,
+                f"descVersion '{desc_version}' is not an integer. The game accepts "
+                f"{DESC_VERSION_MIN}-{DESC_VERSION_MAX} and refuses to load anything else.",
                 location="modDesc",
             )
+            return
+
+        if revision < DESC_VERSION_MIN or revision > DESC_VERSION_MAX:
+            report.add(
+                Severity.ERROR,
+                f"descVersion {revision} is outside {DESC_VERSION_MIN}-{DESC_VERSION_MAX}. "
+                "mods.lua prints 'Unsupported mod description version' and does not load the mod.",
+                location="modDesc",
+            )
+            return
+
+        report.add(
+            Severity.INFO,
+            f"descVersion = {revision}",
+            location="modDesc",
+        )
 
     def _check_required_tags(self, root: ET.Element, report: ValidationReport) -> None:
         for tag in REQUIRED_TEXT_TAGS:

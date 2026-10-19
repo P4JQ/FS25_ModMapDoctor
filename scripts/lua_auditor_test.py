@@ -344,6 +344,20 @@ def test_legacy_api() -> None:
     )
 
 
+def test_sandbox() -> None:
+    print("Lua sandbox")
+    check("LUA-SAN-001" in ids(lua('local t = os.time()')), "os.time() is an error")
+    check("LUA-SAN-001" in ids(lua('local d = os.date("*t")')), "os.date() is an error")
+    check(lua('local t = os.time()').findings[0].severity is Severity.ERROR, "os.time() severity is ERROR")
+    check("LUA-SAN-001" not in ids(lua("-- local t = os.time()\n")), "os.time() inside a comment is ignored")
+    check("LUA-SAN-001" not in ids(lua('local s = "os.time()"')), "os.time() inside a string is ignored")
+    check("LUA-SAN-002" in ids(lua("table.move(a, 1, #a, 1, b)")), "table.move() is an error")
+    check("LUA-SAN-002" not in ids(lua("local packed = table.pack(1, 2)")), "table.pack() is not table.move()")
+    check("LUA-SAN-003" in ids(lua("if skip then goto continue end\n::continue::")), "authored goto and label are errors")
+    check(ids(lua("if skip then goto l19 end\n::l12::")).count("LUA-SAN-003") == 0, "decompiler goto l<number> is not flagged")
+    check("LUA-SAN-001" not in ids(lua("local timestamp = g_currentMission.time")), "g_currentMission.time is clean")
+
+
 # ----------------------------------------------------------------------
 # Vanilla regression
 # ----------------------------------------------------------------------
@@ -367,6 +381,7 @@ def test_vanilla_sources() -> None:
     calibrated = {
         "LUA-EVT-004", "LUA-SPEC-004", "LUA-OLD-001", "LUA-OLD-002", "LUA-OLD-003",
         "LUA-OLD-004", "LUA-OLD-005", "LUA-OLD-006", "LUA-OLD-007", "LUA-OLD-009",
+        "LUA-SAN-001", "LUA-SAN-002", "LUA-SAN-003",
     }
     hits: dict[str, list[str]] = {}
     files = sorted(LUA_SRC.rglob("*.lua"))
@@ -498,13 +513,53 @@ def test_auditor() -> None:
             check(False, f"binary garbage crashed the auditor: {exc!r}")
 
 
+def test_desc_version_range() -> None:
+    """mods.lua rejects a descVersion outside 90-111 before scripts load."""
+    from app.validators.moddesc_validator import ModDescValidator
+
+    print("descVersion range")
+
+    def report_for(version: str) -> ValidationReport:
+        with tempfile.TemporaryDirectory() as tmp:
+            mod = Path(tmp)
+            (mod / "modDesc.xml").write_text(
+                f'<modDesc descVersion="{version}"><author>a</author>'
+                f"<version>1.0.0.0</version><iconFilename>icon.png</iconFilename></modDesc>",
+                encoding="utf-8",
+            )
+            (mod / "icon.png").write_bytes(b"x")
+            return ModDescValidator(mod).validate()
+
+    low = report_for("83")
+    high = report_for("112")
+    ok = report_for("92")
+    current = report_for("104")
+    check(
+        any(i.severity == Severity.ERROR and "outside 90-111" in i.message for i in low.issues),
+        "descVersion 83 is an error",
+    )
+    check(
+        any(i.severity == Severity.ERROR and "outside 90-111" in i.message for i in high.issues),
+        "descVersion 112 is an error",
+    )
+    check(
+        not any("outside 90-111" in i.message for i in ok.issues)
+        and any(i.severity == Severity.INFO and "descVersion = 92" in i.message for i in ok.issues),
+        "descVersion 92 stays valid",
+    )
+    check(
+        any(i.severity == Severity.INFO and "descVersion = 104" in i.message for i in current.issues),
+        "descVersion 104 stays valid",
+    )
+
+
 def test_samples_and_pipeline() -> None:
     print("Samples and pipeline")
     ok = run_xml_validation_suite(ROOT / "samples" / "sample_ok_mod")
     lua_ok = ok.section(SECTION_LUA)
     check(lua_ok is not None and lua_ok.passed and not report_ids(lua_ok), "sample_ok_mod: Lua audit is clean")
     check(ok.passed, "sample_ok_mod: whole suite passes")
-    check(len(ok.sections) == 4, "suite has four sections")
+    check(len(ok.sections) == 7, "suite has seven sections")
 
     broken = run_xml_validation_suite(ROOT / "samples" / "sample_broken_mod")
     lua_broken = broken.section(SECTION_LUA)
@@ -514,7 +569,7 @@ def test_samples_and_pipeline() -> None:
     check(not broken.passed, "sample_broken_mod: suite fails")
 
     xml_only = run_xml_validation_suite(ROOT / "samples" / "sample_ok_mod", include_lua=False)
-    check(len(xml_only.sections) == 3, "include_lua=False skips the Lua section")
+    check(len(xml_only.sections) == 6, "include_lua=False skips the Lua section")
 
     # CLI exit codes
     import main as cli  # noqa: PLC0415
@@ -528,8 +583,10 @@ def main() -> int:
         test_events,
         test_specializations,
         test_legacy_api,
+        test_sandbox,
         test_vanilla_sources,
         test_auditor,
+        test_desc_version_range,
         test_samples_and_pipeline,
     ]
     for test in tests:

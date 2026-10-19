@@ -118,6 +118,39 @@ LEGACY_API_RULES: tuple[LegacyApiRule, ...] = (
         severity=Severity.INFO,
         specializations_only=True,
     ),
+    # Sandbox crashes. Documentation has no os.* call. The skill records the
+    # runtime and compiler errors, and VERIFIED-FACTS.md records 0 corpus hits.
+    _rule(
+        "LUA-SAN-001",
+        r"\bos\s*\.\s*(?:time|date)\s*\(",
+        "os.time() and os.date() are nil in the FS25 Lua sandbox",
+        "g_currentMission.time, or g_currentMission.environment.currentDay / currentHour",
+        "fs25-claude-skill references/pitfalls/what-doesnt-work.md "
+        "(attempt to call a nil value) and references/giants-source/VERIFIED-FACTS.md "
+        "(0 references to any os.* in the corpus)",
+        severity=Severity.ERROR,
+    ),
+    _rule(
+        "LUA-SAN-002",
+        r"\btable\s*\.\s*move\s*\(",
+        "table.move() is not available in the FS25 Lua environment",
+        "a loop that copies the range, or table.insert",
+        "fs25-claude-skill references/giants-source/VERIFIED-FACTS.md: "
+        "table.move() has 0 hits and is unavailable. table.pack() is a different "
+        "function and is not flagged",
+        severity=Severity.ERROR,
+    ),
+    _rule(
+        "LUA-SAN-003",
+        r"\bgoto\s+(?!l\d+\b)[A-Za-z_]\w*|::\s*(?!l\d+\b)[A-Za-z_]\w*\s*::",
+        "goto and ::labels:: are Lua 5.2 syntax and FS25 compiles Lua 5.1",
+        "an if block or an early return",
+        "fs25-claude-skill references/pitfalls/what-doesnt-work.md: compiler error "
+        "'Incomplete statement: expected assignment or a function call'. "
+        "goto l<number> and ::l<number>:: are decompiler artifacts "
+        "(references/giants-source/DECOMPILED-CAVEATS.md) and are not flagged",
+        severity=Severity.ERROR,
+    ),
 )
 
 

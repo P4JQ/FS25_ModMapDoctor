@@ -29,7 +29,13 @@ from app.gui.main_window import (  # noqa: E402
     TAB_VALIDATOR,
     MainWindow,
 )
-from app.gui.tabs.lua_generator_tab import TAB_LUA, TAB_XML, LuaGeneratorTab  # noqa: E402
+from app.gui.tabs.lua_generator_tab import (  # noqa: E402
+    FORM_STORE,
+    TAB_LUA,
+    TAB_STORE,
+    TAB_XML,
+    LuaGeneratorTab,
+)
 from app.gui.tabs.xml_validator_tab import XmlValidatorTab  # noqa: E402
 from app.gui.widgets import output_panel as panel_module  # noqa: E402
 
@@ -106,6 +112,9 @@ def run() -> int:
         text = validator.results.get("1.0", "end")
         check("[Lua Audit]" in text, "results contain the [Lua Audit] section")
         check("[Fill Types & Foliage]" in text, "results contain the fill-type section")
+        check("[ModHub Compliance]" in text, "results contain the ModHub section")
+        check("[I3D Scenegraph]" in text, "results contain the I3D section")
+        check("[Husbandry]" in text, "results contain the Husbandry section")
         check("FILL-004" in text and "FRUIT-008" in text, "broken sample reports fill and foliage findings")
         check("LUA-EVT-004" in text, "broken sample reports LUA-EVT-004")
         check("LUA-OLD-001" in text, "broken sample reports LUA-OLD-001")
@@ -118,6 +127,8 @@ def run() -> int:
         text = validator.results.get("1.0", "end")
         check("[Lua Audit]" in text and "LUA-" not in text, "ok sample: Lua audit without findings")
         check("[Fill Types & Foliage]" in text and "FILL-" not in text and "FRUIT-" not in text, "ok sample: fill and foliage section is clean")
+        check("[ModHub Compliance]" in text and "HUB-001" not in text and "DDS-002" not in text, "ok sample: ModHub section has no junk or format errors")
+        check("[Husbandry]" in text and "HUS-001" not in text, "ok sample: Husbandry section has no load errors")
         check("PASSED" in validator.status_var.get(), "ok sample: status line says PASSED")
         base.screenshot(window, "21_auditor_ok")
 
@@ -244,6 +255,31 @@ def run() -> int:
     check(tab.script_type_var.get() == SCRIPT_TYPE_OPTIONS[0] and tab.target_var.get() == TARGET_OBJECT_OPTIONS[0], "Reset Form restores the dropdowns")
     check(panel.save_label() == "Save as XML file", "Reset Form restores the generic save label")
     base.screenshot(window, "26_lua_generator_reset")
+
+    # ---- Store Item --------------------------------------------------------
+    tab.form_tabs.set(FORM_STORE)
+    tab._on_form_tab()
+    pump(window, 8)
+    check(tab.generate_button.cget("text") == "Generate Store XML", "Store Item tab renames the generate button")
+    tab._generate_store()
+    check("Item Title is required" in tab.status_label.cget("text"), "store title is required")
+    tab.title_field.set("Sample Trailer")
+    tab.price_field.set("12500")
+    tab.brand_field.set("LIZARD")
+    tab.washable_var.set(True)
+    tab._generate_store()
+    pump(window, 8)
+    store_doc = panel.document(TAB_STORE)
+    check(store_doc is not None and "<storeData>" in store_doc.text, "store generation fills the Store XML tab")
+    check(store_doc is not None and "<name>Sample Trailer</name>" in store_doc.text, "store XML contains the title")
+    check(store_doc is not None and "<category>misc</category>" in store_doc.text, "store XML uses the schema default category")
+    check(store_doc is not None and "<price>12500</price>" in store_doc.text, "store XML contains the price")
+    check(store_doc is not None and "<washable />" in store_doc.text, "washable is written beside storeData")
+    check(panel.active_tab() == TAB_STORE, "Store XML tab is selected")
+    check(panel.save_label() == "Save as XML file", "store output saves as XML")
+    panel.copy_active()
+    check("Copied" in tab.status_label.cget("text"), "Copy to Clipboard works for store XML")
+    base.screenshot(window, "27_store_item_generated")
 
     window.destroy()
     print("-" * 60)

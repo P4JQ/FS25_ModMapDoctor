@@ -36,9 +36,12 @@ class XmlValidatorTab(ctk.CTkFrame):
                 "Select a mod root folder. Runs [modDesc.xml], then [Vehicle Validation] "
                 "(type attribute, custom vehicleTypes, and XML blocks vs registered "
                 "specializations), then [Fill Types & Foliage] (fillTypes.xml, fruitTypes "
-                "and foliage XML: upper-case names, categories, converters the loader "
-                "drops silently, and foliage states), then [Lua Audit] for every .lua "
-                "file registered in modDesc.xml and every file it loads with source()."
+                "and foliage XML), then [ModHub Compliance] (DDS header checks, junk files, "
+                "and localization keys), then [I3D Scenegraph] (fileId, file case, and "
+                "duplicate nodeId), then [Husbandry] (placeable.husbandry attributes the "
+                "loader rejects). Textures and i3D files are read-only. Then [Lua Audit] for every "
+                ".lua file registered in modDesc.xml and every file it loads with source(). "
+                "Sandbox calls os.time, os.date, table.move, and authored goto are errors."
             ),
             wraplength=720,
             justify="left",
@@ -78,6 +81,11 @@ class XmlValidatorTab(ctk.CTkFrame):
             font=ctk.CTkFont(family="Consolas", size=13),
         )
         self.results.grid(row=3, column=0, sticky="nsew", padx=16, pady=(8, 8))
+        inner = self.results._textbox
+        inner.tag_config("error", foreground="#E74C3C")
+        inner.tag_config("warning", foreground="#E67E22")
+        inner.tag_config("info", foreground="#5DADE2")
+        inner.tag_config("ok", foreground="#27AE60")
         self.results.insert(
             "1.0",
             "Results will appear here.\n\n"
@@ -123,5 +131,23 @@ class XmlValidatorTab(ctk.CTkFrame):
     def _set_results(self, text: str) -> None:
         self.results.configure(state="normal")
         self.results.delete("1.0", "end")
-        self.results.insert("1.0", text)
+        for line in text.splitlines(keepends=True):
+            tag = _severity_tag(line)
+            if tag:
+                self.results.insert("end", line, tag)
+            else:
+                self.results.insert("end", line)
         self.results.configure(state="disabled")
+
+
+def _severity_tag(line: str) -> str:
+    stripped = line.lstrip()
+    if stripped.startswith("[ERROR]"):
+        return "error"
+    if stripped.startswith("[WARNING]"):
+        return "warning"
+    if stripped.startswith("[INFO]"):
+        return "info"
+    if stripped.startswith("[OK]"):
+        return "ok"
+    return ""

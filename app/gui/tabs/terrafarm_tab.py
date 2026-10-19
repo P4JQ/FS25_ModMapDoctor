@@ -123,10 +123,40 @@ _PROFILES: dict[str, dict[str, FieldRule]] = {
         "width": _rule("e.g. 3", required=True),
         "density": _rule("0.75"),
     },
+    "ripper": {
+        "fill_unit": _rule("", enabled=False),
+        "shovel_node": _rule("", enabled=False),
+        "leveler_node": _rule("", enabled=False),
+        "discharge_node": _rule("", enabled=False),
+        "raycast": _rule("", enabled=False),
+        "reference_node": _rule("e.g. posNodeRef", required=True),
+        "width": _rule("e.g. 1.5", required=True),
+        "density": _rule("0.75"),
+    },
+    "excavatorRipper": {
+        "fill_unit": _rule("", enabled=False),
+        "shovel_node": _rule("", enabled=False),
+        "leveler_node": _rule("", enabled=False),
+        "discharge_node": _rule("", enabled=False),
+        "raycast": _rule("", enabled=False),
+        "reference_node": _rule("e.g. posNodeRef", required=True),
+        "width": _rule("e.g. 1.5", required=True),
+        "density": _rule("0.75"),
+    },
+    "discharger": {
+        "fill_unit": _rule("dischargeNode"),
+        "shovel_node": _rule("", enabled=False),
+        "leveler_node": _rule("", enabled=False),
+        "discharge_node": _rule("1"),
+        "raycast": _rule("0.4"),
+        "reference_node": _rule("dischargeNode"),
+        "width": _rule("dischargeNode"),
+        "density": _rule("0.75"),
+    },
 }
 
 # Machine types that expose an outputOffset in their <workArea> table.
-_OUTPUT_OFFSET_TYPES = frozenset({"shovel", "excavatorShovel"})
+_OUTPUT_OFFSET_TYPES = frozenset({"shovel", "excavatorShovel", "discharger"})
 
 # Fields that live inside <workArea> and are disabled when it is excluded.
 _WORK_AREA_KEYS = frozenset({"reference_node", "width", "density"})
@@ -140,6 +170,7 @@ class TerraFarmTab(ctk.CTkFrame):
         self._generator = TerraFarmGenerator()
         self._type_label_to_id = dict(MACHINE_TYPE_OPTIONS)
         self._mode_vars: dict[str, ctk.BooleanVar] = {}
+        self._mode_boxes: dict[str, ctk.CTkCheckBox] = {}
         self._fields: dict[str, LabeledEntry] = {}
         self._generated: GeneratedFiles | None = None
         self._build()
@@ -252,9 +283,9 @@ class TerraFarmTab(ctk.CTkFrame):
             var = ctk.BooleanVar(value=True)
             self._mode_vars[mode] = var
             row, column = divmod(index, 2)
-            ctk.CTkCheckBox(body, text=mode, variable=var).grid(
-                row=4 + row, column=column, sticky="w", pady=(0, 6)
-            )
+            box = ctk.CTkCheckBox(body, text=mode, variable=var)
+            box.grid(row=4 + row, column=column, sticky="w", pady=(0, 6))
+            self._mode_boxes[mode] = box
 
         ctk.CTkLabel(
             body, text="Activation Requirements", anchor="w", height=18, font=ctk.CTkFont(size=12)
@@ -428,8 +459,10 @@ class TerraFarmTab(ctk.CTkFrame):
     def _on_type_changed(self, _selected: str) -> None:
         machine_type = self._current_machine_type()
         defaults = set(self._generator.default_modes_for(machine_type))
+        modes_enabled = machine_type != "discharger"
         for mode, var in self._mode_vars.items():
             var.set(mode in defaults)
+            self._mode_boxes[mode].configure(state="normal" if modes_enabled else "disabled")
 
         self.type_description.configure(text=MACHINE_TYPE_DESCRIPTIONS.get(machine_type, ""))
         self._refresh_field_states()
@@ -524,9 +557,11 @@ class TerraFarmTab(ctk.CTkFrame):
             }
         )
         self.output_panel.select(TAB_MACHINE)
-        self._set_status(
-            f"Generated {config.machine_type} config with modes: {' '.join(config.modes)}."
-        )
+        if config.modes:
+            detail = f"with modes: {' '.join(config.modes)}"
+        else:
+            detail = "without an input block"
+        self._set_status(f"Generated {config.machine_type} config {detail}.")
         print(f"[TerraFarm] Generated XML for type={config.machine_type} modes={config.modes}")
 
     def _reset_form(self) -> None:

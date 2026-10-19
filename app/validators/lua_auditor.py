@@ -20,6 +20,8 @@ The checks are modelled on the vanilla FS25 scripts (see
   flags.
 * Outdated API: only things the vanilla code marks deprecated or never uses
   while using a documented replacement.
+* Sandbox: ``os.time`` / ``os.date``, ``table.move``, and authored ``goto``
+  labels. Decompiler-shaped ``goto l12`` / ``::l12::`` are ignored.
 
 The analysis is text based (comments and strings are ignored) and never
 executes Lua, so it reports likely problems with a rule id, not certainties.

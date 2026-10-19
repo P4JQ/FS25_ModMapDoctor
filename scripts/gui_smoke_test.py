@@ -305,7 +305,12 @@ def run() -> int:
     check("<vehicle>" in window.clipboard_get(), "Copy to Clipboard puts XML on the clipboard")
 
     # Compactor + excavator quick pass
-    for label, expected in (("Compactor (roller)", "compactor"), ("Excavator", "excavatorShovel")):
+    for label, expected in (
+        ("Compactor (roller)", "compactor"),
+        ("Excavator", "excavatorShovel"),
+        ("Ripper", "ripper"),
+        ("Excavator ripper", "excavatorRipper"),
+    ):
         tab.type_var.set(label)
         tab._on_type_changed(label)
         tab._fields["reference_node"].set("posNodeRef")
@@ -313,7 +318,20 @@ def run() -> int:
         tab._generate()
         check(tab._generated is not None, f"{expected} generation succeeded")
         if tab._generated is not None:
-            ET.fromstring(tab._generated.machine_xml)
+            machine = ET.fromstring(tab._generated.machine_xml).find("machine")
+            check(machine is not None and machine.get("type") == expected, f"{expected} type attribute")
+
+    tab.type_var.set("Discharger (trailer / truck)")
+    tab._on_type_changed("Discharger (trailer / truck)")
+    check(tab._mode_boxes["LOWER"].cget("state") == "disabled", "discharger disables input modes")
+    tab._fields["reference_node"].clear()
+    tab._fields["width"].clear()
+    tab._generate()
+    check(tab._generated is not None, "discharger generation succeeded")
+    if tab._generated is not None:
+        machine = ET.fromstring(tab._generated.machine_xml).find("machine")
+        check(machine is not None and machine.get("type") == "discharger", "discharger type attribute")
+        check(machine is not None and machine.find("input") is None, "discharger XML has no input block")
 
     screenshot(window, "04_excavator")
     window.destroy()

@@ -257,7 +257,7 @@ def test_samples_and_pipeline() -> None:
     ok = run_xml_validation_suite(ROOT / "samples" / "sample_ok_mod")
     section = ok.section(SECTION_FILL_FRUIT)
     check(section is not None and section.passed and not ids(section), "sample_ok_mod fill/fruit section is clean")
-    check(len(ok.sections) == 4, "suite has four sections")
+    check(len(ok.sections) == 7, "suite has seven sections")
 
     broken = run_xml_validation_suite(ROOT / "samples" / "sample_broken_mod")
     broken_section = broken.section(SECTION_FILL_FRUIT)

@@ -2,6 +2,9 @@
 <modDesc descVersion="92">
     <author>Broken Sample</author>
     <version>0.0.1.0</version>
+    <title>
+        <en>$l10n_sample_broken_title</en>
+    </title>
     <!-- iconFilename intentionally missing -->
 
     <extraSourceFiles>

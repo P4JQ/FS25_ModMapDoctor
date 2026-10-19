@@ -22,6 +22,9 @@ MACHINE_TYPE_OPTIONS: tuple[tuple[str, str], ...] = (
     ("Trencher", "trencher"),
     ("Excavator", "excavatorShovel"),
     ("Compactor (roller)", "compactor"),
+    ("Ripper", "ripper"),
+    ("Excavator ripper", "excavatorRipper"),
+    ("Discharger (trailer / truck)", "discharger"),
 )
 
 # Short descriptions taken from INDEX.md / MACHINE_*.md
@@ -31,6 +34,9 @@ MACHINE_TYPE_DESCRIPTIONS: dict[str, str] = {
     "trencher": "Trenchers and similar equipment with a fillUnit to store material.",
     "excavatorShovel": "Excavators and excavator shovels (stationary, no driving direction).",
     "compactor": "Ground compactors and generic equipment without material handling.",
+    "ripper": "For ground rippers.",
+    "excavatorRipper": "For excavator ground rippers.",
+    "discharger": "For trailers, trucks and generic discharge only vehicles.",
 }
 
 INPUT_MODES: tuple[str, ...] = ("FLATTEN", "SMOOTH", "LOWER", "PAINT")
@@ -44,6 +50,9 @@ _DEFAULT_MODES: dict[str, tuple[str, ...]] = {
     "trencher": ("LOWER", "FLATTEN", "SMOOTH", "PAINT"),
     "excavatorShovel": ("FLATTEN", "SMOOTH", "LOWER", "PAINT"),
     "compactor": ("FLATTEN", "SMOOTH", "PAINT"),
+    "ripper": ("LOWER", "FLATTEN", "SMOOTH", "PAINT"),
+    "excavatorRipper": ("LOWER", "FLATTEN", "SMOOTH", "PAINT"),
+    "discharger": (),
 }
 
 _PREREQUISITES: dict[str, str] = {
@@ -52,7 +61,23 @@ _PREREQUISITES: dict[str, str] = {
     "trencher": "fillUnit (required), dischargeable (optional)",
     "excavatorShovel": "fillUnit (required), shovel (required), dischargeable / leveler (optional)",
     "compactor": "none",
+    "ripper": "none",
+    "excavatorRipper": "none",
+    "discharger": "fillUnit (required), dischargeable (required), trailer (optional)",
 }
+
+# Types whose <workArea> table marks referenceNode and width as required.
+_WORK_AREA_REQUIRED: dict[str, str] = {
+    "trencher": "Trencher",
+    "compactor": "Compactor",
+    "ripper": "Ripper",
+    "excavatorRipper": "Excavator ripper",
+}
+
+# fillUnitIndex is a <machine> attribute only where the MACHINE_*.md table lists it.
+_FILL_UNIT_ON_MACHINE = frozenset(
+    {"shovel", "leveler", "trencher", "excavatorShovel", "discharger"}
+)
 
 _XML_DECLARATION = '<?xml version="1.0" encoding="utf-8" standalone="no" ?>'
 
@@ -116,9 +141,13 @@ class TerraFarmGenerator:
         if machine_type not in {t for _, t in MACHINE_TYPE_OPTIONS}:
             raise ValueError(f"Unsupported machine type: {machine_type}")
 
-        modes = self._normalize_modes(config.modes, machine_type)
-        if not modes:
-            raise ValueError("Select at least one input mode (FLATTEN / SMOOTH / LOWER / PAINT).")
+        if machine_type == "discharger":
+            # MACHINE_DISCHARGER.md has no <input modes> block.
+            modes = []
+        else:
+            modes = self._normalize_modes(config.modes, machine_type)
+            if not modes:
+                raise ValueError("Select at least one input mode (FLATTEN / SMOOTH / LOWER / PAINT).")
 
         self._validate_required(config, machine_type)
 
@@ -161,8 +190,8 @@ class TerraFarmGenerator:
         if machine_type == "trencher" and not config.fill_unit_index.strip():
             raise ValueError("Trencher requires fillUnitIndex (see MACHINE_TRENCHER.md).")
 
-        if machine_type in {"trencher", "compactor"} and config.include_work_area:
-            label = "Trencher" if machine_type == "trencher" else "Compactor"
+        if machine_type in _WORK_AREA_REQUIRED and config.include_work_area:
+            label = _WORK_AREA_REQUIRED[machine_type]
             if not config.reference_node.strip():
                 raise ValueError(f"{label} workArea requires referenceNode.")
             if not config.work_width.strip():
@@ -211,8 +240,9 @@ class TerraFarmGenerator:
             "<!-- When used as a vehicle type, add FS25_0_TerraFarm.machine as the LAST specialization. -->",
             "<vehicle>",
             f"{indent}<machine {self._format_attributes([('type', machine_type), *attrs])}>",
-            f"{indent * 2}<input modes={quoteattr(' '.join(modes))} />",
         ]
+        if modes:
+            lines.append(f"{indent * 2}<input modes={quoteattr(' '.join(modes))} />")
 
         if config.include_work_area:
             work_attrs = self._work_area_attributes(config, machine_type)
@@ -238,7 +268,7 @@ class TerraFarmGenerator:
             ("requirePoweredOn", "true" if config.require_powered_on else "false"),
         ]
 
-        if config.fill_unit_index.strip() and machine_type != "compactor":
+        if config.fill_unit_index.strip() and machine_type in _FILL_UNIT_ON_MACHINE:
             attrs.append(("fillUnitIndex", config.fill_unit_index.strip()))
 
         if machine_type in {"shovel", "excavatorShovel"}:
@@ -254,6 +284,11 @@ class TerraFarmGenerator:
 
         if machine_type == "leveler" and config.leveler_node_index.strip():
             attrs.append(("levelerNodeIndex", config.leveler_node_index.strip()))
+
+        # MACHINE_DISCHARGER.md: dischargeNodeIndex default is 1, so an empty
+        # field omits the attribute and the game default applies.
+        if machine_type == "discharger" and config.discharge_node_index.strip():
+            attrs.append(("dischargeNodeIndex", config.discharge_node_index.strip()))
 
         return attrs
 
@@ -275,10 +310,10 @@ class TerraFarmGenerator:
         if config.rotation.strip():
             attrs.append(("rotation", config.rotation.strip()))
 
-        if machine_type in {"shovel", "excavatorShovel"} and config.output_offset.strip():
+        if machine_type in {"shovel", "excavatorShovel", "discharger"} and config.output_offset.strip():
             attrs.append(("outputOffset", config.output_offset.strip()))
 
-        if machine_type == "excavatorShovel" and config.raycast_distance.strip():
+        if machine_type in {"excavatorShovel", "discharger"} and config.raycast_distance.strip():
             attrs.append(("raycastDistance", config.raycast_distance.strip()))
 
         return attrs

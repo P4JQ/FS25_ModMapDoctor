@@ -2,7 +2,7 @@
 
 # FS25 Mod & Map Doctor
 
-**v0.2.0 &nbsp;|&nbsp; An all-in-one local development suite for Farming Simulator 25 modders, scripters and map makers.**
+**v0.5.0 &nbsp;|&nbsp; An all-in-one local development suite for Farming Simulator 25 modders, scripters and map makers.**
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![GUI](https://img.shields.io/badge/GUI-CustomTkinter-1f6aa5)
@@ -20,18 +20,21 @@ and generate correct boilerplate instead of writing it from memory.*
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [What's New in v0.2.0](#whats-new-in-v020)
-3. [Key Features](#key-features)
+2. [What's New in v0.5.0](#whats-new-in-v050)
+3. [What's New in v0.4.0](#whats-new-in-v040)
+4. [What's New in v0.3.0](#whats-new-in-v030)
+5. [What's New in v0.2.0](#whats-new-in-v020)
+6. [Key Features](#key-features)
    - [Mod & Lua Auditor](#1-mod--lua-auditor)
    - [TerraFarm Configuration Generator](#2-terrafarm-configuration-generator)
    - [Map Helper](#3-map-helper)
    - [Lua Script Generator](#4-lua-script-generator)
-4. [Configuration & How It Works](#configuration--how-it-works)
-5. [Installation & Usage](#installation--usage)
-6. [Using the Tool: Tips & Parameters](#using-the-tool-tips--parameters)
-7. [Project Structure](#project-structure)
-8. [Running the Test Suite](#running-the-test-suite)
-9. [Known Limitations](#known-limitations)
+7. [Configuration & How It Works](#configuration--how-it-works)
+8. [Installation & Usage](#installation--usage)
+9. [Using the Tool: Tips & Parameters](#using-the-tool-tips--parameters)
+10. [Project Structure](#project-structure)
+11. [Running the Test Suite](#running-the-test-suite)
+12. [Known Limitations](#known-limitations)
 
 ---
 
@@ -45,8 +48,8 @@ dedicated server, and a `writeStream` that does not match its `readStream` only 
 
 | Tab | What it is for |
 | --- | --- |
-| **Mod & Lua Auditor** | Validate `modDesc.xml`, vehicle XML, fill types, foliage and Lua scripts. |
-| **TerraFarm Generator** | Build TerraFarm machine XML (shovel, leveler, trencher, excavator, compactor) with a visual form. |
+| **Mod & Lua Auditor** | Validate `modDesc.xml`, vehicle XML, fill types, foliage, DDS headers, ModHub leftovers, localization keys, i3D references, husbandry placeables and Lua scripts. |
+| **TerraFarm Generator** | Build TerraFarm machine XML (shovel, leveler, trencher, excavator, compactor, ripper, excavator ripper, discharger) with a visual form. |
 | **Map Helper** | Build `mapGroundResources.xml` and the matching `InfoLayer` snippet for a map. |
 | **Lua Generator** | Generate multiplayer-aware Lua templates plus the XML needed to register them. |
 
@@ -57,6 +60,117 @@ Nothing is uploaded and no Lua is ever executed. Everything runs on your machine
 ![Mod & Lua Auditor](docs/images/auditor.png)
 
 </div>
+
+---
+
+## What's New in v0.5.0
+
+### Lua sandbox errors
+
+The Lua auditor now reports three load-breaking calls in the mod's own scripts. Comments and strings are ignored. The rules were run against all 267 vanilla Lua files in `Documentation/FS25-lua-scripting-main` and stayed silent there.
+
+| Rule | What it catches |
+| --- | --- |
+| `LUA-SAN-001` | `os.time()` and `os.date()`. The sandbox call is nil (`references/pitfalls/what-doesnt-work.md`, `references/giants-source/VERIFIED-FACTS.md`). |
+| `LUA-SAN-002` | `table.move()`. Zero hits in the corpus; `table.pack()` is left alone. |
+| `LUA-SAN-003` | Authored `goto` and `::label::`. Decompiler shapes `goto l12` and `::l12::` are not flagged. |
+
+### TerraFarm ripper, excavator ripper and discharger
+
+The generator dropdown now includes the three machine types documented in `Documentation/docs/MACHINE_RIPPER.md`, `MACHINE_EXCAVATOR_RIPPER.md` and `MACHINE_DISCHARGER.md`.
+
+* Ripper and excavator ripper use `type="ripper"` and `type="excavatorRipper"`, the example mode order `LOWER FLATTEN SMOOTH PAINT`, and a work area that requires `referenceNode` and `width`. They do not write `fillUnitIndex`.
+* Discharger writes no `<input>` block. `fillUnitIndex` and `dischargeNodeIndex` stay on `<machine>`. `raycastDistance` and `outputOffset` stay on `<workArea>`. An empty `dischargeNodeIndex` is omitted so the documented default `1` applies. The input-mode checkboxes are disabled for this type.
+
+Field `polygonIndex` from `field/Field.lua` is not checked. `Field:load` reads it with `getUserAttribute` on a live node, and this tool does not decide which i3D node is a field.
+
+---
+
+## What's New in v0.4.0
+
+### Husbandry placeable load checker
+
+The Mod & Lua Auditor now runs a **Husbandry** section. It reads `<placeable>` XML and checks the `placeable.husbandry` attributes that the FS25 loader rejects or silently skips. The rules are the `onLoad` branches in `Documentation/FS25-lua-scripting-main/animals/husbandry/placeables/`.
+
+| Rule | Severity | What the loader does |
+| --- | --- | --- |
+| `HUS-001` | Error | `animals#type` missing or blank. `PlaceableHusbandryAnimals:onLoad` logs "Missing animal type!" and sets the loading state to error. |
+| `HUS-002` | Warning | A `deliveryArea` is missing `startNode`, `widthNode`, or `heightNode`. `loadDeliveryArea` returns false and the area is dropped. |
+| `HUS-003`–`HUS-005` | Error | `feedingRobot` is missing `filename`, `class`, or `linkNode`. Each one stops the placeable load. |
+| `HUS-006` | Warning | A feeding-robot `spline` has no `node`. The loader logs it and stops reading further splines. |
+| `HUS-007` | Error | A fence `section` has no `segmentId`, and `fence#xmlFilename` is set. The section loop logs "Missing segment id". |
+| `HUS-008` | Error | A `customizable="true"` fence section is not last. The loader logs that and stops. |
+| `HUS-009` | Warning | A meadow `fruitType` has no `name`. `getFruitTypeByName` skips it with no log line. |
+| `HUS-010` | Warning | A vanilla meadow fruit is missing a growth-state attribute. The loader logs it and skips that fruit. |
+| `HUS-011`–`HUS-013` | Warning | A milking robot is missing `filename`, `class`, or `linkNode`. The loader skips that robot. |
+| `HUS-014` | Warning | A `palletTrigger` has no `node`. The loader ignores it and writes no log line. |
+| `HUS-015` | Error | The file contains a husbandry placeable but the XML does not parse. |
+
+A folder with no husbandry placeable reports `HUS-000` as info. Info does not fail the suite.
+
+The checker does not read collision masks. `PlaceableHusbandryPallets.lua` tests `CollisionFlag.VEHICLE` on the loaded shape, and no local file assigns that bit's number. It also does not invent unload-trigger elements: `UnloadTrigger.createTriggers` has no function body in the local sources. Animal type names and meadow growth-state names are not compared with a catalog, because those tables are resolved at runtime.
+
+---
+
+## What's New in v0.3.0
+
+### ModHub Compliance & Texture Suite
+
+The Mod & Lua Auditor now runs a **ModHub Compliance** section on every folder validation. It is a static reader.
+It does not convert, resize, or flip textures, so it cannot introduce a compression mismatch or a
+"Texture was flipped with quality loss" warning of its own.
+
+**DDS header scan.** Each `.dds` file is opened read-only. Python's `struct` module unpacks the 128-byte header
+(and the 20-byte DX10 extension when the FourCC is `DX10`). Pixel blocks are never decoded. The suffix rules follow
+`Documentation/All compression types.pdf`:
+
+| File | Expected format | Mipmaps |
+| --- | --- | --- |
+| Normal (`_n`, `_normal`) | BC1 | yes (`mipmapCount > 1`) |
+| Diffuse (`_diffuse`) with an alpha flag | BC7 | yes |
+| Diffuse (`_diffuse`) without an alpha flag | BC1 | yes |
+| Height (`_height`) | BC4 | yes |
+| Specular (`_specular`) | BC1 | yes |
+| `mod_icon` | BC1 | no |
+| `store_icon` | BC7 | no |
+
+A width or height that is not a power of two is a warning on every DDS file. A file that is not a DDS header is an error.
+Alpha is taken from the header flags. BC7 is treated as alpha-capable because a DX10 header has no separate "alpha used" bit.
+
+**Junk scan.** `.git`, `.github`, `.blend`, `.blend1`, `Thumbs.db` and `desktop.ini` are errors. A `.git` folder is
+reported once; the files inside it are not listed one by one.
+
+**Localization.** A `$l10n_` key in `<title>`, `<description>`, or a store item's `<name>`, `<description>` or
+`<function>` must exist in an inline `<l10n>` block or in a local dictionary (`l10n_en.xml`, or
+`<l10n filenamePrefix="..."/>` plus `<prefix>_en.xml`, as described in the skill's localization notes). A missing key
+is a warning. Vanilla keys such as `$l10n_typeDesc_tipper` on other vehicle elements are not part of this check.
+
+| Rule | What it catches |
+| --- | --- |
+| `DDS-001` | The file is not a readable DDS header. This one is an error. |
+| `DDS-002` | Block compression does not match the suffix row above. |
+| `DDS-003` | Mipmaps are missing on a map that needs them, or present on `mod_icon` / `store_icon`. |
+| `DDS-004` | Width or height is not a power of two. |
+| `HUB-001` | A developer leftover that should not be in a ModHub zip. This one is an error. |
+| `L10N-001` | A title, description or store text key has no matching localization entry. |
+| `L10N-002` | A declared `filenamePrefix` has no English file, or a localization file cannot be parsed. |
+
+`DDS-000` is an info line: either the file matches its row, or the suffix has no row in this matrix.
+
+**I3D scenegraph.** The auditor reads `.i3d` files named by `vehicle.base.filename` and `placeable.base.filename`
+(the paths registered in `Vehicle.lua` and `Placeable.lua`). It parses them as XML and does not rewrite them.
+Rules follow the Giants i3D 1.6 schema: a `fileId` that is not declared on `Files/File` is `I3D-001`, a `filename`
+that does not match the disk with exact case is `I3D-002`, a repeated `nodeId` on a TransformGroup in `Scene` is
+`I3D-003`, and a repeated `fileId` in `Files` is `I3D-004`. These are warnings.
+
+**Localization across languages.** A `<text name="...">` key that exists in `l10n_en.xml` (or `translation_en.xml`)
+and is missing from another language file in the same set, such as `l10n_de.xml`, is `L10N-003` (info). English
+remains the fallback, so this does not fail the mod.
+
+**Store Item Generator.** The Lua Generator tab has a Store Item sub-tab. It writes a `<storeData>` block from
+`StoreManager.registerStoreDataXMLPaths`: name, brand (default `LIZARD` when you type one), category (schema default
+`misc`), price, and an optional image. Washable adds `<washable />` beside that block. Component configurations add
+`storeData.bundleElements` with the configuration name you enter. Copy and Save use the Store XML output tab.
 
 ---
 
@@ -109,9 +223,10 @@ A name in neither the mod nor the catalog still warns. This is not a full copy o
 
 ### 1. Mod & Lua Auditor
 
-One click runs four checks in sequence and prints a single sectioned report (`modDesc.xml`, `Vehicle Validation`,
-`Fill Types & Foliage`, `Lua Audit`). Every finding has a severity (error, warning or info) and a stable rule ID.
-The fill-type and foliage rules are listed under [What's New in v0.2.0](#whats-new-in-v020).
+One click runs seven checks in sequence and prints a single sectioned report (`modDesc.xml`, `Vehicle Validation`,
+`Fill Types & Foliage`, `ModHub Compliance`, `I3D Scenegraph`, `Husbandry`, `Lua Audit`). Every finding has a severity (error, warning or info) and a
+stable rule ID. The fill-type rules are listed under [What's New in v0.2.0](#whats-new-in-v020). The texture, junk and
+localization rules are listed under [What's New in v0.3.0](#whats-new-in-v030).
 
 **modDesc.xml and file references**
 
@@ -348,7 +463,7 @@ FS25_ModMapDoctor/
 |-- README.md
 |-- app/
 |   |-- core/                   # models, case-sensitive path helpers, Lua scanner
-|   |-- validators/             # modDesc, vehicle and Lua auditors + pipeline
+|   |-- validators/             # modDesc, vehicle, fill/foliage, ModHub, i3D, husbandry and Lua auditors
 |   |-- generators/             # TerraFarm, map resources and Lua generators
 |   |-- knowledge/              # bundled rule data derived from the documentation
 |   `-- gui/                    # main window, tabs and reusable widgets
@@ -364,6 +479,10 @@ FS25_ModMapDoctor/
 Each script is standalone and exits non-zero on failure. The GUI tests open a real window briefly.
 
 ```bash
+python scripts/terrafarm_types_test.py      # ripper, excavator ripper, discharger
+python scripts/husbandry_auditor_test.py  # husbandry placeable attributes
+python scripts/i3d_store_test.py          # i3D headers and storeData XML
+python scripts/modhub_compliance_test.py  # DDS headers, junk files, localization
 python scripts/fill_fruit_auditor_test.py # fill types and foliage
 python scripts/lua_auditor_test.py        # Lua auditor rules
 python scripts/lua_generator_test.py      # generated templates
@@ -392,10 +511,18 @@ Being honest about what the tool can and cannot promise:
 - **Unconfirmed engine names.** Details such as `g_currentModName` and the exact specialization table key are taken
   from vanilla usage but could not be fully confirmed from the stripped reference sources.
 - **Vanilla vehicle types** are only partly embedded, so some specialization checks on them are warnings.
-- **Vehicle XML only.** The validator checks vehicle files. Placeable XML files are not validated, although the Lua
-  auditor checks placeable specialization scripts.
+- **Vehicle XML and husbandry placeables.** The vehicle section checks vehicle files. The Husbandry section checks
+  `placeable.husbandry` attributes listed under [What's New in v0.4.0](#whats-new-in-v040). It does not check collision
+  masks, unload-trigger child elements, animal type names, or whether a meadow growth-state name exists on the fruit.
+  A fence section is checked only when `fence#xmlFilename` is set, because `onLoad` returns before the section loop
+  otherwise. `customizable="true"` is the only value treated as customizable; the boolean parser is not in the local
+  sources. Other placeable types are not validated. The Lua auditor still checks placeable specialization scripts.
 - **Static knowledge.** Rules reflect the documentation snapshot they were built from. Future game updates may need
   new extraction runs.
+- **DDS reader is header-only.** It does not decode pixels and it never writes a texture. Whether a BC7 file actually
+  uses its alpha channel is not visible in the DX10 header, so a BC7 diffuse is checked against the "with transparency"
+  row. A suffix that is not in the v0.3.0 matrix (for example `_mask` or `_distance`) is reported as info, not as a
+  format error.
 - **Vanilla fill and fruit catalog.** The fallback list is the core crop and ground set plus names the bundled
   scripts reference. A crop that is in the base game but in neither of those sources still warns until it is added
   to `app/knowledge/vanilla_materials.py`. The numeric fill-type cap (`SEND_NUM_BITS`) is not checked, because that

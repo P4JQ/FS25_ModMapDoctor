@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<i3D name="sampleTrailer" version="1.6">
+    <Files>
+        <File fileId="1" filename="../../textures/mod_icon.dds"/>
+    </Files>
+    <Scene>
+        <TransformGroup name="sampleTrailer" nodeId="1">
+            <Shape name="body" shapeId="1" nodeId="2"/>
+        </TransformGroup>
+    </Scene>
+</i3D>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<i3D name="broken" version="1.6">
+    <Files>
+        <File fileId="1" filename="MissingTexture.dds"/>
+        <File fileId="1" filename="alsoMissing.dds"/>
+    </Files>
+    <Materials>
+        <Material name="body" materialId="1">
+            <Texture fileId="9"/>
+        </Material>
+    </Materials>
+    <Scene>
+        <TransformGroup name="root" nodeId="1">
+            <Shape name="body" shapeId="1" nodeId="1"/>
+        </TransformGroup>
+    </Scene>
+</i3D>
