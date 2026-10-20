@@ -115,6 +115,7 @@ def run() -> int:
         check("[ModHub Compliance]" in text, "results contain the ModHub section")
         check("[I3D Scenegraph]" in text, "results contain the I3D section")
         check("[Husbandry]" in text, "results contain the Husbandry section")
+        check("[Store Items]" in text, "results contain the Store Items section")
         check("FILL-004" in text and "FRUIT-008" in text, "broken sample reports fill and foliage findings")
         check("LUA-EVT-004" in text, "broken sample reports LUA-EVT-004")
         check("LUA-OLD-001" in text, "broken sample reports LUA-OLD-001")
@@ -129,6 +130,7 @@ def run() -> int:
         check("[Fill Types & Foliage]" in text and "FILL-" not in text and "FRUIT-" not in text, "ok sample: fill and foliage section is clean")
         check("[ModHub Compliance]" in text and "HUB-001" not in text and "DDS-002" not in text, "ok sample: ModHub section has no junk or format errors")
         check("[Husbandry]" in text and "HUS-001" not in text, "ok sample: Husbandry section has no load errors")
+        check("[Store Items]" in text and "STORE-001" not in text, "ok sample: store image is present")
         check("PASSED" in validator.status_var.get(), "ok sample: status line says PASSED")
         base.screenshot(window, "21_auditor_ok")
 

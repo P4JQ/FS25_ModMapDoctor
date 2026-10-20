@@ -12,12 +12,14 @@ from app.validators.i3d_auditor import I3DAuditor
 from app.validators.lua_auditor import LuaAuditor
 from app.validators.moddesc_validator import ModDescValidator
 from app.validators.modhub_auditor import ModHubAuditor
+from app.validators.store_auditor import StoreAuditor
 from app.validators.vehicle_validator import VehicleValidator
 
 SECTION_MODDESC = "modDesc.xml"
 SECTION_VEHICLES = "Vehicle Validation"
 SECTION_FILL_FRUIT = "Fill Types & Foliage"
 SECTION_MODHUB = "ModHub Compliance"
+SECTION_STORE = "Store Items"
 SECTION_I3D = "I3D Scenegraph"
 SECTION_HUSBANDRY = "Husbandry"
 SECTION_LUA = "Lua Audit"
@@ -80,7 +82,8 @@ def run_xml_validation_suite(mod_root: Path, *, include_lua: bool = True) -> Val
     ``include_lua=False`` to run the XML stages only. The fill-type section
     always runs: it reads fillTypes, fruitTypes and foliage XML in the folder.
     The ModHub section always runs: junk files, localization keys, and DDS
-    headers. It never rewrites a texture. The I3D section reads referenced
+    headers. It never rewrites a texture. The Store section reads storeData
+    and listed store item files. The I3D section reads referenced
     i3D XML and does not rewrite it. The Husbandry section reads placeable
     XML and checks husbandry attributes the loader rejects.
     """
@@ -92,6 +95,7 @@ def run_xml_validation_suite(mod_root: Path, *, include_lua: bool = True) -> Val
         (SECTION_VEHICLES, VehicleValidator(root).validate()),
         (SECTION_FILL_FRUIT, FillFruitAuditor(root).audit()),
         (SECTION_MODHUB, ModHubAuditor(root).audit()),
+        (SECTION_STORE, StoreAuditor(root).audit()),
         (SECTION_I3D, I3DAuditor(root).audit()),
         (SECTION_HUSBANDRY, HusbandryAuditor(root).audit()),
     ]

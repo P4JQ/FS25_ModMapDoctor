@@ -199,7 +199,7 @@ def test_samples() -> None:
         "sample_ok_mod Husbandry section has no warnings",
     )
     check(ok.passed, "sample_ok_mod suite still passes")
-    check(len(ok.sections) == 7, "suite has seven sections")
+    check(len(ok.sections) == 8, "suite has eight sections")
 
 
 def main() -> int:

@@ -255,7 +255,7 @@ def test_samples() -> None:
         "sample_ok_mod ModHub section has no warnings",
     )
     check(ok.passed, "sample_ok_mod suite still passes")
-    check(len(ok.sections) == 7, "suite has seven sections")
+    check(len(ok.sections) == 8, "suite has eight sections")
 
     broken = run_xml_validation_suite(ROOT / "samples" / "sample_broken_mod")
     broken_section = broken.section(SECTION_MODHUB)

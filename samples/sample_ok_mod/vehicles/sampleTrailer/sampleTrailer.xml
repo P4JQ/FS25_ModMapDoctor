@@ -2,6 +2,7 @@
 <vehicle type="doctorSampleTrailer">
     <storeData>
         <name>Sample Trailer</name>
+        <image>textures/mod_icon.dds</image>
         <category>trailers</category>
         <price>1000</price>
     </storeData>

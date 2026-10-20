@@ -2,7 +2,7 @@
 
 # FS25 Mod & Map Doctor
 
-**v0.5.0 &nbsp;|&nbsp; An all-in-one local development suite for Farming Simulator 25 modders, scripters and map makers.**
+**v0.7.0 &nbsp;|&nbsp; An all-in-one local development suite for Farming Simulator 25 modders, scripters and map makers.**
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![GUI](https://img.shields.io/badge/GUI-CustomTkinter-1f6aa5)
@@ -20,21 +20,23 @@ and generate correct boilerplate instead of writing it from memory.*
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [What's New in v0.5.0](#whats-new-in-v050)
-3. [What's New in v0.4.0](#whats-new-in-v040)
-4. [What's New in v0.3.0](#whats-new-in-v030)
-5. [What's New in v0.2.0](#whats-new-in-v020)
-6. [Key Features](#key-features)
+2. [What's New in v0.7.0](#whats-new-in-v070)
+3. [What's New in v0.6.0](#whats-new-in-v060)
+4. [What's New in v0.5.0](#whats-new-in-v050)
+5. [What's New in v0.4.0](#whats-new-in-v040)
+6. [What's New in v0.3.0](#whats-new-in-v030)
+7. [What's New in v0.2.0](#whats-new-in-v020)
+8. [Key Features](#key-features)
    - [Mod & Lua Auditor](#1-mod--lua-auditor)
    - [TerraFarm Configuration Generator](#2-terrafarm-configuration-generator)
    - [Map Helper](#3-map-helper)
    - [Lua Script Generator](#4-lua-script-generator)
-7. [Configuration & How It Works](#configuration--how-it-works)
-8. [Installation & Usage](#installation--usage)
-9. [Using the Tool: Tips & Parameters](#using-the-tool-tips--parameters)
-10. [Project Structure](#project-structure)
-11. [Running the Test Suite](#running-the-test-suite)
-12. [Known Limitations](#known-limitations)
+9. [Configuration & How It Works](#configuration--how-it-works)
+10. [Installation & Usage](#installation--usage)
+11. [Using the Tool: Tips & Parameters](#using-the-tool-tips--parameters)
+12. [Project Structure](#project-structure)
+13. [Running the Test Suite](#running-the-test-suite)
+14. [Known Limitations](#known-limitations)
 
 ---
 
@@ -60,6 +62,35 @@ Nothing is uploaded and no Lua is ever executed. Everything runs on your machine
 ![Mod & Lua Auditor](docs/images/auditor.png)
 
 </div>
+
+---
+
+## What's New in v0.7.0
+
+### Base-game fill types and shop categories
+
+The fill-type catalog is the `fillType` names in `reference/maps_fillTypes.xml` (177 names). `OATS`, `COFFEE`, `GRAVEL`, `SAND` and `DIRT` are not in that file. `mapGroundResources.xml` uses `fillType="DIRT"` without defining it, so `DIRT` is not treated as a base-game fill type. `GRAVEL` in that example is a paint layer. Fruit names were not guessed from foliage filenames.
+
+Shop categories come from `reference/storeCategories.xml`. `StoreManager:getCategoryByName` compares `string.upper(name)`.
+
+* `STORE-006` — a `storeData` category token is not in that file and not declared as a `storeCategory` on this mod. The loader logs "Invalid category" and skips the name.
+* `STORE-007` — a listed store item has no accepted category while `showInStore` is enabled. The loader logs "No categories defined in store data! Using 'misc' instead!" and uses `MISC`. An unlisted file is not checked, because `loadItem` is not called for it.
+
+---
+
+## What's New in v0.6.0
+
+### Store items the shop drops
+
+The auditor adds a **Store Items** section. It reads every `storeData` block and copies two warnings from `Documentation/docs/script/Shop/StoreManager.md`:
+
+* `STORE-002` — `name` is missing or empty. The loader logs "Name missing for storeitem. Ignoring store item!" and drops the item.
+* `STORE-001` — `image` is missing or empty while `showInStore` is enabled (the documented default is true). The loader logs "Image icon is missing for storeitem. Ignoring store item!" and drops the item. `showInStore` text `false` does not warn. A value whose boolean meaning is not in the local sources, such as `0`, is not warned either.
+* `STORE-003` — a file listed in `modDesc.xml` `storeItems` has no `storeData` child. The loader logs an xmlError, "No storeData found. StoreItem will be ignored!", and drops that item. The mod still loads, so this is a warning. A file that is missing, or that is not listed as a store item, is not reported here.
+* `STORE-004` — `price` is a plain number below 0. The loader logs "Price has to be greater than 0. Using default 10.000 instead!" and substitutes 10000. The comparison in code is `price < 0`, so `0` and a missing `price` do not warn.
+* `STORE-005` — `lifetime` is a plain number that is `0` or below. The loader logs "Lifetime has to be greater than 0. Using default 600 instead!" and substitutes 600. A missing `lifetime` does not warn.
+
+The image path is not checked on disk. `Utils.getFilename` runs after this warning, and its base directory is not in the local sources.
 
 ---
 
@@ -223,8 +254,8 @@ A name in neither the mod nor the catalog still warns. This is not a full copy o
 
 ### 1. Mod & Lua Auditor
 
-One click runs seven checks in sequence and prints a single sectioned report (`modDesc.xml`, `Vehicle Validation`,
-`Fill Types & Foliage`, `ModHub Compliance`, `I3D Scenegraph`, `Husbandry`, `Lua Audit`). Every finding has a severity (error, warning or info) and a
+One click runs eight checks in sequence and prints a single sectioned report (`modDesc.xml`, `Vehicle Validation`,
+`Fill Types & Foliage`, `ModHub Compliance`, `Store Items`, `I3D Scenegraph`, `Husbandry`, `Lua Audit`). Every finding has a severity (error, warning or info) and a
 stable rule ID. The fill-type rules are listed under [What's New in v0.2.0](#whats-new-in-v020). The texture, junk and
 localization rules are listed under [What's New in v0.3.0](#whats-new-in-v030).
 
@@ -479,6 +510,7 @@ FS25_ModMapDoctor/
 Each script is standalone and exits non-zero on failure. The GUI tests open a real window briefly.
 
 ```bash
+python scripts/store_auditor_test.py       # storeData name and image
 python scripts/terrafarm_types_test.py      # ripper, excavator ripper, discharger
 python scripts/husbandry_auditor_test.py  # husbandry placeable attributes
 python scripts/i3d_store_test.py          # i3D headers and storeData XML
@@ -523,10 +555,9 @@ Being honest about what the tool can and cannot promise:
   uses its alpha channel is not visible in the DX10 header, so a BC7 diffuse is checked against the "with transparency"
   row. A suffix that is not in the v0.3.0 matrix (for example `_mask` or `_distance`) is reported as info, not as a
   format error.
-- **Vanilla fill and fruit catalog.** The fallback list is the core crop and ground set plus names the bundled
-  scripts reference. A crop that is in the base game but in neither of those sources still warns until it is added
-  to `app/knowledge/vanilla_materials.py`. The numeric fill-type cap (`SEND_NUM_BITS`) is not checked, because that
-  constant is not assigned in the documentation set.
+- **Vanilla fill and fruit catalog.** Fill names are the base-game `maps_fillTypes.xml` list. Fruit names are not
+  taken from foliage filenames. A fill type added by a DLC, and not by the mod, still warns. The numeric fill-type
+  cap (`SEND_NUM_BITS`) is not checked, because that constant is not assigned in the documentation set.
 
 ---
 

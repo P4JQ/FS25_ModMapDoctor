@@ -1,107 +1,234 @@
-"""Vanilla FS25 fill-type and fruit-type names used as a fallback catalog.
+"""Vanilla FS25 fill-type and fruit-type names.
 
-``data/maps/maps_fillTypes.xml`` is not in the documentation set, so this is
-not a dump of that file. A name is included for one of two reasons:
+Fill names are the `fillType` `name` attributes in
+`reference/maps_fillTypes.xml` (177 names). Lookup is case-insensitive,
+matching `string.upper` in the fill-type loader.
 
-* It is one of the core crop and ground materials shipped with this tool
-  (wheat through sand).
-* A vanilla script in ``Documentation/`` refers to it as ``FillType.NAME`` or
-  ``FruitType.NAME``. ``UNKNOWN`` is excluded: it is the loader's empty value,
-  not a material a mod should rely on.
+`mapGroundResources.xml` writes `fillType="DIRT"` and does not define that
+type. No file in `reference/` has a `DIRT` fill type, so it is not vanilla.
+`GRAVEL` in that example is a `paintLayer`. `OATS`, `COFFEE` and `SAND`
+are not fill-type names in the game file either.
 
-Lookup is case-insensitive. Callers compare ``name.upper()`` against these sets.
+Fruit names are the crop names already taken from `FruitType` references
+in `Documentation/` that also appear in the game fill file, plus `GRASS`,
+`MEADOW` and `POPLAR`. Foliage filenames in `maps_fruitTypes.xml` are
+not treated as fruit names.
 """
 
 from __future__ import annotations
 
-# Core crops and ground materials. Ground materials are fill types only.
-_CORE_FILL_TYPES: frozenset[str] = frozenset(
-    {
-        "WHEAT",
-        "BARLEY",
-        "OATS",
-        "CANOLA",
-        "MAIZE",
-        "SUNFLOWER",
-        "SOYBEAN",
-        "POTATO",
-        "SUGARBEET",
-        "COTTON",
-        "SUGARCANE",
-        "GRAPE",
-        "OLIVE",
-        "COFFEE",
-        "RICE",
-        "SPINACH",
-        "STONE",
-        "DIRT",
-        "GRAVEL",
-        "SAND",
-    }
-)
-
-# Names that appear as FillType.NAME in Documentation/docs and
-# Documentation/FS25-lua-scripting-main. UNKNOWN is intentionally absent.
-_DOCUMENTED_FILL_TYPES: frozenset[str] = frozenset(
+_GAME_FILL_TYPES: frozenset[str] = frozenset(
     {
         "AIR",
+        "BALE_NET",
+        "BALE_TWINE",
+        "BALE_WRAP",
+        "BARLEY",
+        "BARLEY_CUT",
+        "BARREL",
+        "BATHTUB",
+        "BEETROOT",
+        "BOARDS",
+        "BREAD",
+        "BUCKET",
+        "BUFFALOMILK",
+        "BUFFALOMILK_BOTTLED",
+        "BUFFALOMOZZARELLA",
+        "BUTTER",
+        "CAKE",
+        "CANNED_PEAS",
+        "CANOLA",
+        "CANOLA_CUT",
+        "CANOLA_OIL",
+        "CARROT",
+        "CARTONROLL",
+        "CEMENT",
+        "CEMENTBRICKS",
+        "CEREAL",
         "CHAFF",
+        "CHEESE",
+        "CHICKEN",
+        "CHICKEN_ROOSTER",
+        "CHILLI",
+        "CHOCOLATE",
+        "CLOTHES",
+        "COTTON",
+        "COW_ANGUS",
+        "COW_BRAHMAN",
+        "COW_HIGHLAND_CATTLE",
+        "COW_HOLSTEIN",
+        "COW_LIMOUSIN",
+        "COW_SWISS_BROWN",
+        "COW_WATERBUFFALO",
         "DEF",
         "DIESEL",
         "DIGESTATE",
+        "DRYGRASS",
         "DRYGRASS_WINDROW",
+        "EGG",
         "ELECTRICCHARGE",
+        "ENOKI",
+        "FABRIC",
+        "FERMENTEDNAPACABBAGE",
         "FERTILIZER",
+        "FLOUR",
         "FORAGE",
         "FORAGE_MIXING",
+        "FURNITURE",
+        "GARLIC",
+        "GOAT",
+        "GOATCHEESE",
+        "GOATMILK",
+        "GOATMILK_BOTTLED",
+        "GRAPE",
+        "GRAPEJUICE",
+        "GRASS",
         "GRASS_WINDROW",
+        "GREENBEAN",
         "HERBICIDE",
+        "HONEY",
+        "HORSE_BAY",
+        "HORSE_BLACK",
+        "HORSE_CHESTNUT",
+        "HORSE_DUN",
+        "HORSE_GRAY",
+        "HORSE_PALOMINO",
+        "HORSE_PINTO",
+        "HORSE_SEAL_BROWN",
+        "JARRED_GREENBEAN",
+        "LETTUCE",
         "LIME",
         "LIQUIDFERTILIZER",
         "LIQUIDMANURE",
         "LIQUIDSEEDTREATMENT",
+        "MAIZE",
         "MANURE",
+        "MEADOW",
         "METHANE",
+        "MILK",
+        "MILK_BOTTLED",
+        "MINERAL_FEED",
+        "NAPACABBAGE",
+        "NOODLESOUP",
+        "OAT",
+        "OAT_CUT",
+        "OILSEEDRADISH",
+        "OLIVE",
+        "OLIVE_OIL",
+        "OYSTER",
+        "PAPERROLL",
+        "PARSNIP",
+        "PEA",
+        "PIANO",
+        "PIGFOOD",
+        "PIG_BERKSHIRE",
+        "PIG_BLACK_PIED",
+        "PIG_LANDRACE",
+        "PLANKS",
         "POPLAR",
+        "POTATO",
+        "POTATOCHIPS",
+        "PREFABWALL",
+        "PRESERVEDBEETROOT",
+        "PRESERVEDCARROTS",
+        "PRESERVEDPARSNIP",
+        "RAISINS",
+        "RICE",
+        "RICEFLOUR",
+        "RICELONGGRAIN",
+        "RICEROLLS",
+        "RICESAPLINGS",
+        "RICE_BAGS",
+        "RICE_BOXES",
+        "RICE_OIL",
+        "ROADSALT",
+        "ROOFPLATES",
+        "ROPE",
+        "ROUNDBALE",
+        "ROUNDBALE_COTTON",
+        "ROUNDBALE_DRYGRASS",
+        "ROUNDBALE_GRASS",
+        "ROUNDBALE_WOOD",
         "SEEDS",
+        "SHEEP_BLACK_WELSH",
+        "SHEEP_LANDRACE",
+        "SHEEP_STEINSCHAF",
+        "SHEEP_SWISS_MOUNTAIN",
         "SILAGE",
+        "SILAGE_ADDITIVE",
+        "SNOW",
+        "SORGHUM",
+        "SOUPCANSBEETROOT",
+        "SOUPCANSCARROTS",
+        "SOUPCANSMIXED",
+        "SOUPCANSPARSNIP",
+        "SOUPCANSPOTATO",
+        "SOYBEAN",
+        "SOYBEAN_CUT",
+        "SPINACH",
+        "SPINACH_BAGS",
+        "SPRING_ONION",
+        "SQUAREBALE",
+        "SQUAREBALE_COTTON",
+        "SQUAREBALE_DRYGRASS",
+        "SQUAREBALE_GRASS",
+        "SQUAREBALE_WOOD",
         "STONE",
         "STRAW",
+        "STRAWBERRY",
+        "SUGAR",
+        "SUGARBEET",
+        "SUGARBEET_CUT",
+        "SUGARCANE",
+        "SUNFLOWER",
+        "SUNFLOWER_OIL",
         "TARP",
+        "TOMATO",
+        "TOYTRACTOR",
+        "TREE",
         "TREESAPLINGS",
+        "WAGON",
         "WATER",
+        "WEED",
         "WHEAT",
+        "WHEAT_CUT",
         "WOOD",
+        "WOODBEAM",
         "WOODCHIPS",
+        "WOOL",
     }
 )
 
-# Crops from the core list. Stone, dirt, gravel and sand are not fruits.
-_CORE_FRUIT_TYPES: frozenset[str] = frozenset(
-    name for name in _CORE_FILL_TYPES if name not in {"STONE", "DIRT", "GRAVEL", "SAND"}
-)
+VANILLA_FILL_TYPES: frozenset[str] = _GAME_FILL_TYPES
 
-# Names that appear as FruitType.NAME in the same documentation. UNKNOWN excluded.
-_DOCUMENTED_FRUIT_TYPES: frozenset[str] = frozenset(
+VANILLA_FRUIT_TYPES: frozenset[str] = frozenset(
     {
+        "BARLEY",
         "CANOLA",
+        "COTTON",
         "GRAPE",
         "GRASS",
+        "MAIZE",
         "MEADOW",
+        "OLIVE",
         "POPLAR",
+        "POTATO",
+        "RICE",
+        "SOYBEAN",
+        "SPINACH",
+        "SUGARBEET",
+        "SUGARCANE",
+        "SUNFLOWER",
         "WHEAT",
     }
 )
-
-VANILLA_FILL_TYPES: frozenset[str] = _CORE_FILL_TYPES | _DOCUMENTED_FILL_TYPES
-VANILLA_FRUIT_TYPES: frozenset[str] = _CORE_FRUIT_TYPES | _DOCUMENTED_FRUIT_TYPES
 
 
 def is_vanilla_fill_type(name: str | None) -> bool:
-    """True when ``name`` is a base-game fill type (case-insensitive)."""
+    """True when `name` is a base-game fill type (case-insensitive)."""
     return name is not None and name.upper() in VANILLA_FILL_TYPES
 
 
 def is_vanilla_fruit_type(name: str | None) -> bool:
-    """True when ``name`` is a base-game fruit type (case-insensitive)."""
+    """True when `name` is a base-game fruit type (case-insensitive)."""
     return name is not None and name.upper() in VANILLA_FRUIT_TYPES

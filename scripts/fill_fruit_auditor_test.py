@@ -125,7 +125,7 @@ def test_vanilla_catalog() -> None:
         "maps/fillTypes.xml": """<?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <map>
     <fillTypeCategories>
-        <fillTypeCategory name="GROUND">STONE DIRT GRAVEL SAND</fillTypeCategory>
+        <fillTypeCategory name="GROUND">STONE OAT SNOW</fillTypeCategory>
     </fillTypeCategories>
     <fillTypeConverters>
         <fillTypeConverter name="MOWER">
@@ -156,7 +156,23 @@ def test_vanilla_catalog() -> None:
 """,
     })
     found = set(ids(report))
-    check("FILL-003" not in found, "vanilla ground materials do not raise FILL-003")
+    check("FILL-003" not in found, "game fill types do not raise FILL-003")
+    retired = audit({
+        "maps/fillTypes.xml": """<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<map>
+    <fillTypeCategories>
+        <fillTypeCategory name="OLD">OATS GRAVEL SAND COFFEE DIRT</fillTypeCategory>
+    </fillTypeCategories>
+</map>
+""",
+    })
+    retired_ids = retired.issues
+    retired_text = " ".join(issue.message for issue in retired_ids)
+    check(
+        all(f"'{name}'" in retired_text for name in ("OATS", "GRAVEL", "SAND", "COFFEE", "DIRT")),
+        "names absent from maps_fillTypes.xml are unknown",
+    )
+    check("'" + "OAT" + "'" not in retired_text, "the game fill type OAT is not reported")
     check("FRUIT-005" not in found, "vanilla fruit RICE does not raise FRUIT-005")
     check("FRUIT-006" not in found, "vanilla fruits in a category do not raise FRUIT-006")
     check("FRUIT-010" not in found, "vanilla windrow STRAW does not raise FRUIT-010")
@@ -257,7 +273,7 @@ def test_samples_and_pipeline() -> None:
     ok = run_xml_validation_suite(ROOT / "samples" / "sample_ok_mod")
     section = ok.section(SECTION_FILL_FRUIT)
     check(section is not None and section.passed and not ids(section), "sample_ok_mod fill/fruit section is clean")
-    check(len(ok.sections) == 7, "suite has seven sections")
+    check(len(ok.sections) == 8, "suite has eight sections")
 
     broken = run_xml_validation_suite(ROOT / "samples" / "sample_broken_mod")
     broken_section = broken.section(SECTION_FILL_FRUIT)

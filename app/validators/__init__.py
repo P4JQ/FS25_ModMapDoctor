@@ -6,11 +6,13 @@ from app.validators.i3d_auditor import I3DAuditor
 from app.validators.lua_auditor import LuaAuditor, analyze_lua
 from app.validators.moddesc_validator import ModDescValidator
 from app.validators.modhub_auditor import ModHubAuditor
+from app.validators.store_auditor import StoreAuditor
 from app.validators.pipeline import (
     SECTION_FILL_FRUIT,
     SECTION_HUSBANDRY,
     SECTION_I3D,
     SECTION_MODHUB,
+    SECTION_STORE,
     ValidationSuiteResult,
     run_xml_validation_suite,
 )
@@ -25,6 +27,8 @@ __all__ = [
     "LuaAuditor",
     "ModDescValidator",
     "ModHubAuditor",
+    "StoreAuditor",
+    "SECTION_STORE",
     "SECTION_FILL_FRUIT",
     "SECTION_MODHUB",
     "VehicleValidator",

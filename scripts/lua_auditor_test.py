@@ -559,7 +559,7 @@ def test_samples_and_pipeline() -> None:
     lua_ok = ok.section(SECTION_LUA)
     check(lua_ok is not None and lua_ok.passed and not report_ids(lua_ok), "sample_ok_mod: Lua audit is clean")
     check(ok.passed, "sample_ok_mod: whole suite passes")
-    check(len(ok.sections) == 7, "suite has seven sections")
+    check(len(ok.sections) == 8, "suite has eight sections")
 
     broken = run_xml_validation_suite(ROOT / "samples" / "sample_broken_mod")
     lua_broken = broken.section(SECTION_LUA)
@@ -569,7 +569,7 @@ def test_samples_and_pipeline() -> None:
     check(not broken.passed, "sample_broken_mod: suite fails")
 
     xml_only = run_xml_validation_suite(ROOT / "samples" / "sample_ok_mod", include_lua=False)
-    check(len(xml_only.sections) == 6, "include_lua=False skips the Lua section")
+    check(len(xml_only.sections) == 7, "include_lua=False skips the Lua section")
 
     # CLI exit codes
     import main as cli  # noqa: PLC0415
